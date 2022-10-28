@@ -1,0 +1,19 @@
+﻿<Application x:Class="Bs.Main.FrontEnd.VoucherTracker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Bs.Main.FrontEnd.VoucherTracker"
+             xmlns:voucherVms="clr-namespace:Bs.VoucherModule.FrontEnd.ViewModels;assembly=Bs.VoucherModule.FrontEnd"
+             xmlns:voucherViews="clr-namespace:Bs.VoucherModule.FrontEnd.Views;assembly=Bs.VoucherModule.FrontEnd"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate DataType="{x:Type voucherVms:VoucherListingVm}">
+                <voucherViews:VoucherListingView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type voucherVms:VoucherDetailVm}">
+                <voucherViews:VoucherDetailView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Bs.Main.FrontEnd.ChequeTracker.Views.ChequeTracking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bs.Main.FrontEnd.ChequeTracker.Views" 
+        xmlns:viewmodels="clr-namespace:Bs.Main.FrontEnd.ChequeTracker.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ChequeTrackingVm}"
+        mc:Ignorable="d"
+        Title="ChequeTracking" Height="450" Width="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding Cheques}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Cheque No." Binding="{Binding CheckNumber}"/>
+                <DataGridTextColumn Header="Payee" Binding="{Binding PayeeId}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
+                <DataGridTextColumn Header="Crossed" Binding="{Binding IsCrossed}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Remarks" Binding="{Binding Remarks}"/>
+                <DataGridTextColumn Header="Voucher No." Binding="{Binding VoucherNumber}"/>
+                <DataGridTextColumn Header="Book No." Binding="{Binding BookNumber}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

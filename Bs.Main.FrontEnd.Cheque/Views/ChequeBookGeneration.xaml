@@ -1,0 +1,78 @@
+﻿<Window x:Class="Bs.Main.FrontEnd.ChequeTracker.Views.ChequeBookGeneration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bs.Main.FrontEnd.ChequeTracker.Views" xmlns:viewmodels="clr-namespace:Bs.Main.FrontEnd.ChequeTracker.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ChequeBookGenerationVm}"
+        mc:Ignorable="d"
+        Title="ChequeBookGeneration" Height="450" Width="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="6 3"/>
+                <Setter Property="MinWidth" Value="75"/>
+            </Style>
+            <Style x:Key="endorsement" TargetType="TextBox">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="AcceptsReturn" Value="True"/>
+                <Setter Property="Margin" Value="6 3"/>
+                <Setter Property="Height" Value="100"/>
+            </Style>
+            <Style TargetType="DataGrid">
+                <Setter Property="Margin" Value="6 3"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Book Id:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ChequeBook.Id}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Cheque Code:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ChequeBook.ChequeCode}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="First Cheque No.:"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ChequeBook.FirstChequeNumber}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Total Cheques:"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding ChequeBook.TotalCheque}"/>
+            <TextBlock Grid.Row="2" Grid.Column="4" Text="Leading Zeros:"/>
+            <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding ChequeBook.LeadingZeros}"/>
+            
+            <Button Grid.Row="2" Grid.Column="6" Content="Generate" Command="{Binding Generate}"/>
+        </Grid>
+
+        <DataGrid Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Cheque Number"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
