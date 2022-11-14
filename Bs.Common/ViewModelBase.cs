@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Bs.Common.Utils;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Bs.Common
 {
@@ -30,27 +33,57 @@ namespace Bs.Common
             set => SetProperty(ref statusMessage, value);
         }
 
+        public ViewModelBase() => Cancel = new RelayCommand(DoCancel);
 
-        public void SetProgress(string processDescription, double maximum)
+
+        private bool PendingCancel { get; set; }
+        public ICommand Cancel { get; }
+        public void DoCancel()
         {
-            StatusMessage = processDescription;
+            if (MessageBoxes.Inquire("Are you sure you want to cancel?"))
+            {
+                PendingCancel = true;
+                StatusMessage = "Cancellation Pending...";
+            }
+        }
+        public bool IncrementProgress()
+        {
+            ProgressValue++;
+            return PendingCancel;
+        }
+
+
+        public void SetProgress(string progressDescription, double maximum)
+        {
+            StatusMessage = progressDescription;
             ProgressMaximum = maximum;
             ProgressValue = 0;
-            Executable = false;
+            NotifyCanExecuteChanged(false);
         }
 
-        public void SetAsFinishProgress()
+        public void SetAsFinishProgress(string progressDescription = "DONE")
         {
-            StatusMessage = "DONE";
+            StatusMessage = progressDescription;
             ProgressMaximum = 1;
             ProgressValue = 0;
-            Executable = true;
+            NotifyCanExecuteChanged(true);
         }
 
-        public EventHandler? CanExecuteChanged;
+
+
+
+
+
+
+        public event EventHandler<bool>? CanExecuteChanged;
         public bool Executable { get; set; } = true;
-        public void NotifyCanExecuteChanged() =>
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+        public void NotifyCanExecuteChanged(bool executable)
+        {
+            PendingCancel = false;
+            Executable = executable;
+            CanExecuteChanged?.Invoke(this, Executable);
+        }
+
 
 
 

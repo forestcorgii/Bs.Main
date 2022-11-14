@@ -1,5 +1,6 @@
 ﻿using Bs.Common;
 using Bs.Main.FrontEnd.VoucherTracker.ViewModels;
+using Bs.MasterlistModule.FrontEnd;
 using Bs.VoucherModule.FrontEnd;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,9 @@ namespace Bs.Main.FrontEnd.VoucherTracker
             IConfigurationRoot conf = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
 
             ServiceCollection services = new();
-            services.AddVoucherModule(conf);
+            services
+                .AddMasterlistModule(conf)
+                .AddVoucherModule(conf);
 
             services.AddSingleton<NavigationStore>();
 

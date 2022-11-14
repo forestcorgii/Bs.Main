@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Bs.VoucherModule.FrontEnd.ViewModels;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,26 @@ namespace Bs.VoucherModule.FrontEnd.Commands
 {
     public class Detail : IRelayCommand
     {
-        public event EventHandler? CanExecuteChanged;
+        VoucherListingVm ListingVm;
 
-        public bool CanExecute(object? parameter)
+        public Detail(VoucherListingVm listingVm)
         {
-            throw new NotImplementedException();
+            ListingVm = listingVm;
+            ListingVm.CanExecuteChanged += ListingVm_CanExecuteChanged;
         }
 
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            //VoucherDetailVm detailVm = new();
         }
+         
 
-        public void NotifyCanExecuteChanged()
-        {
-            throw new NotImplementedException();
-        }
+
+        public event EventHandler? CanExecuteChanged;
+        public bool CanExecute(object? parameter) => ListingVm.Executable;
+        private void ListingVm_CanExecuteChanged(object? sender, bool e) => NotifyCanExecuteChanged();
+        public void NotifyCanExecuteChanged() =>
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+
     }
 }

@@ -21,7 +21,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Content="Add" Command="{Binding AddVoucher}"/>
+        <Button Grid.Row="0" Grid.Column="0" Content="Add" Command="{Binding Detail}"/>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Vouchers}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Journal Account" Binding="{Binding VoucherNumber}"/>
@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Margin="3,1" Content="Detail"/>
+                            <Button Margin="3,1" Content="Detail" Command="{Binding Detail}" CommandParameter="{Binding }"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,4 +1,5 @@
 ﻿using Bs.Common;
+using Bs.MasterlistModule.FrontEnd.ViewModels;
 using Bs.VoucherModule.FrontEnd.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;

@@ -44,8 +44,8 @@ namespace Bs.VoucherModule.FrontEnd
             services.AddSingleton<NavigationService<VoucherListingVm>>();
 
             services.AddSingleton<VoucherDetailVm>();
-            services.AddSingleton<Func<VoucherListingVm>>((s) => () => s.GetRequiredService<VoucherListingVm>());
-            services.AddSingleton<NavigationService<VoucherListingVm>>();
+            services.AddSingleton<Func<VoucherDetailVm>>((s) => () => s.GetRequiredService<VoucherDetailVm>());
+            services.AddSingleton<NavigationService<VoucherDetailVm>>();
 
 
             return services;

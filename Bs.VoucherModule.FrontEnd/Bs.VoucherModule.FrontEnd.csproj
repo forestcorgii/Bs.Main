@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
@@ -11,9 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Bm.VoucherModule\Bs.VoucherModule.Domain\Bs.VoucherModule.Domain.csproj" />
-    <ProjectReference Include="..\..\Bs.MasterlistModule\Bs.MasterlistModule.Domain\Bs.MasterlistModule.Domain.csproj" />
     <ProjectReference Include="..\Bs.Common\Bs.Common.csproj" />
   </ItemGroup>
+
 
 </Project>

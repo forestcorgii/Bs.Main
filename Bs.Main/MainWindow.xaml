@@ -1,0 +1,36 @@
+﻿<Window x:Class="Bs.Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bs.Main"
+        xmlns:viewmodels="clr-namespace:Bs.Main.Modules.MainModule.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainVm}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MaxWidth="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TreeView Padding="8">
+            <TreeViewItem Header="Ledger">
+                <TreeViewItem Header="Add"/>
+            </TreeViewItem>
+            <TreeViewItem Header="Vouchers">
+                <TreeViewItem Header="Add"/>
+            </TreeViewItem>
+            <TreeViewItem Header="Masterlist">
+                <TreeViewItem Header="Company"/>
+                <TreeViewItem Header="Company Account"/>
+                <TreeViewItem Header="Supplier"/>
+                <TreeViewItem Header="Supplier Account"/>
+                <TreeViewItem Header="Journal Accountsssssssssssssssssssssssssssssssssssssss"/>
+            </TreeViewItem>
+        </TreeView>
+        <ContentControl Content="{Binding CurrentViewModel}" 
+                            Grid.Row="2" Grid.Column="2"
+                            BorderBrush="#FF786F6F" BorderThickness="0.3" Margin="5,0,5,5" 
+            />
+    </Grid>
+</Window>

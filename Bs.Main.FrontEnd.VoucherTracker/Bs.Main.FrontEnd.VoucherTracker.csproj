@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bs.Common\Bs.Common.csproj" />
+    <ProjectReference Include="..\Bs.MasterlistModule.FrontEnd\Bs.MasterlistModule.FrontEnd.csproj" />
     <ProjectReference Include="..\Bs.VoucherModule.FrontEnd\Bs.VoucherModule.FrontEnd.csproj" />
   </ItemGroup>
 
