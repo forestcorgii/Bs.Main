@@ -1,3 +1,7 @@
+using Bs.Common;
+using Bs.Main.Modules.MasterlistModule.Models;
+using Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore;
+using Bs.Main.Modules.MasterlistModule.ViewModels;
 using Bs.Main.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,29 +23,27 @@ namespace Bs.Main.Modules.MasterlistModule
                 dbContext.Database.Migrate();
 
 
-            //services.AddSingleton<Companies>();
-            //services.AddSingleton<CompanyAccounts>();
-            //services.AddSingleton<JournalAccounts>();
-            //services.AddSingleton<Vouchers>();
-            //services.AddSingleton<PayeeAccounts>();
+            services.AddSingleton<Companies>();
+            services.AddSingleton<CompanyAccounts>();
+            services.AddSingleton<JournalAccounts>();
+            services.AddSingleton<Payees>();
+            services.AddSingleton<PayeeAccounts>();
 
 
-            //services.AddSingleton<VoucherManager>();
-            //services.AddSingleton<VoucherProvider>();
-            //services.AddSingleton<CompanyProvider>();
-            //services.AddSingleton<CompanyAccountProvider>();
-            //services.AddSingleton<PayeeProvider>();
-            //services.AddSingleton<PayeeAccountProvider>();
-            //services.AddSingleton<JournalAccountProvider>();
+            services.AddSingleton<CompanyManager>();
+            services.AddSingleton<CompanyAccountManager>();
+            services.AddSingleton<PayeeManager>();
+            services.AddSingleton<PayeeAccountManager>();
+            services.AddSingleton<JournalAccountManager>();
 
 
-            //services.AddSingleton<VoucherListingVm>();
-            //services.AddSingleton<Func<VoucherListingVm>>((s) => () => s.GetRequiredService<VoucherListingVm>());
-            //services.AddSingleton<NavigationService<VoucherListingVm>>();
+            services.AddSingleton<CompanyListingVm>();
+            services.AddSingleton<Func<CompanyListingVm>>((s) => () => s.GetRequiredService<CompanyListingVm>());
+            services.AddSingleton<NavigationService<CompanyListingVm>>();
 
-            //services.AddSingleton<VoucherDetailVm>();
-            //services.AddSingleton<Func<VoucherListingVm>>((s) => () => s.GetRequiredService<VoucherListingVm>());
-            //services.AddSingleton<NavigationService<VoucherListingVm>>();
+            services.AddSingleton<CompanyAccountListingVm>();
+            services.AddSingleton<Func<CompanyAccountListingVm>>((s) => () => s.GetRequiredService<CompanyAccountListingVm>());
+            services.AddSingleton<NavigationService<CompanyAccountListingVm>>();
 
 
             return services;

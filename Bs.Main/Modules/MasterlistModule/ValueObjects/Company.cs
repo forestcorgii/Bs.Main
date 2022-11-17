@@ -15,8 +15,9 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
         public string Tin { get; set; }
         public string BranchCode { get; set; }
 
-        public DateTime DateCreated { get; set; } 
+        public DateTime DateCreated { get; set; }
 
+        public Company() { }
         public Company(string name, string acronym, string tin, string branchCode)
         {
             Name = name;

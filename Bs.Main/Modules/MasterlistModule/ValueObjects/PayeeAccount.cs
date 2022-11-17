@@ -8,6 +8,8 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
         public int Id { get; set; }
         public Guid PayeeId { get; set; }
 
+        public Payee Payee { get; set; }
+
         public string AccountNumber { get; set; }
 
         public Dictionary<string, string> DefaultParticulars { get; set; }

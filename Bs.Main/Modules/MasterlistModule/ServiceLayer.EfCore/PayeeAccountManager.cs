@@ -23,7 +23,7 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
         public IEnumerable<PayeeAccount> GetPayeeAccounts()
         {
             using var context = Factory.CreateDbContext();
-            return context.PayeeAccounts.ToList();
+            return context.PayeeAccounts.Include(pa => pa.Payee).ToList();
         }
 
 
