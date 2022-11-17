@@ -16,5 +16,7 @@ namespace Bs.Main.Modules.MasterlistModule.Models
 
 
         public IEnumerable<Payee> GetPayeeAccounts() => Manager.GetPayees();
+        public void Save(Payee payee) => Manager.SavePayee(payee);
+        public void Delete(Payee payee) => Manager.SavePayee(payee);
     }
 }

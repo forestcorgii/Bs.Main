@@ -15,5 +15,7 @@ namespace Bs.Main.Modules.MasterlistModule.Models
         public JournalAccounts(JournalAccountManager provider) => Manager = provider;
 
         public IEnumerable<JournalAccount> GetJournalAccounts() => Manager.GetJournalAccounts();
+        public void Save(JournalAccount journalAccount) => Manager.SaveJournalAccount(journalAccount);
+        public void Delete(JournalAccount journalAccount) => Manager.SaveJournalAccount(journalAccount);
     }
 }

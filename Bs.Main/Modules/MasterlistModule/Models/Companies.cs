@@ -8,13 +8,26 @@ using System.Threading.Tasks;
 
 namespace Bs.Main.Modules.MasterlistModule.Models
 {
-    public class Companies
+    public class Companies : IGenericModel
     {
-        private CompanyManager CompanyManager;
+        private CompanyManager Manager;
 
-        public Companies(CompanyManager companyProvider) => CompanyManager = companyProvider;
+        public Companies(CompanyManager companyProvider) => Manager = companyProvider;
 
-        public IEnumerable<Company> GetCompanies() => CompanyManager.GetCompanies();
+        public IEnumerable<object> Get() => Manager.GetCompanies();
+        
+        public void Delete(object item)
+        {
+            if (item is Company company)
+                Manager.SaveCompany(company);
+            else throw new Exception("Object Mismatch");
+        }
 
+        public void Save(object item)
+        {
+            if (item is Company company)
+                Manager.SaveCompany(company);
+            else throw new Exception("Object Mismatch");
+        }
     }
 }
