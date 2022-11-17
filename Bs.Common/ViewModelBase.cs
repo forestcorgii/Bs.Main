@@ -85,6 +85,17 @@ namespace Bs.Common
         }
 
 
+        public event EventHandler<IEnumerable<object>> CollectionChanged;
+        public void NotifyCollectionChanged(IEnumerable<object> items) =>
+            CollectionChanged?.Invoke(this, items);
+
+
+        public event EventHandler OnReloadRequest;
+        public void Reload()
+        {
+            OnReloadRequest?.Invoke(this, new EventArgs());
+        }
+
 
 
         public virtual void Dispose() { }

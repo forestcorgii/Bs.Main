@@ -1,5 +1,6 @@
 ﻿using Bs.Common;
 using Bs.Main.Modules.MainModule.ViewModels;
+using Bs.Main.Modules.MainModule.Views;
 using Bs.Main.Modules.MasterlistModule;
 using Bs.Main.Modules.VoucherModule;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,12 @@ namespace Bs.Main
             {
                 DataContext = s.GetRequiredService<MainVm>()
             });
+            
+            services.AddSingleton<MasterlistMainVm>();
+            services.AddSingleton(s => new MasterlistMainView()
+            {
+                DataContext = s.GetRequiredService<MasterlistMainVm>()
+            });
 
 
             return services.BuildServiceProvider();
@@ -48,7 +55,7 @@ namespace Bs.Main
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = Services.GetRequiredService<MainWindow>();
+            MainWindow = Services.GetRequiredService<MasterlistMainView>();
             MainWindow.Show();
 
             base.OnStartup(e);

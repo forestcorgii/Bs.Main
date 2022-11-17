@@ -24,5 +24,11 @@ namespace Bs.Main
         {
             InitializeComponent();
         }
+
+        private void SideBar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!SideBar.IsExpanded)
+                SideBar.IsExpanded = true;
+        }
     }
 }

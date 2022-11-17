@@ -52,7 +52,10 @@ namespace Bs.Main.Persistence.DbContexts
                 {
                     //((Company)entry.Entity).DateModified = DateTime.Now;
                     if (entry.State == EntityState.Added)
+                    {
+                        ((Company)entry.Entity).Id = Company.GenerateId((Company)entry.Entity);
                         ((Company)entry.Entity).DateCreated = DateTime.Now;
+                    }
                 }
                 else if (entry.Entity is CompanyAccount)
                 {

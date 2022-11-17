@@ -18,7 +18,7 @@ namespace Bs.Main.Persistence.DbContexts
 
         public MainDbContextFactory()
         {
-            _connectionString = "server=localhost;database=payable3Test_efdb;user=root;password=Soft1234;";
+            _connectionString = "server=localhost;database=payable3_efdb;user=root;password=Soft1234;";
         }
 
         public MainContext CreateDbContext()

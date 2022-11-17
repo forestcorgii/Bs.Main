@@ -17,6 +17,7 @@ namespace Bs.Main.Persistence.DbContexts
         {
             builder.HasKey(v => v.Id);
 
+            builder.Property(v => v.CompanyId).HasColumnType("VARCHAR(45)");
             builder.Property(v => v.VoucherId);
             builder.Property(v => v.JournalAccountName).HasColumnType("VARCHAR(45)");
             builder.Property(v => v.WithholdingTaxRate).HasColumnType("DOUBLE(4,2)");

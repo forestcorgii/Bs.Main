@@ -15,10 +15,12 @@ namespace Bs.Main.Persistence.DbContexts
         {
             builder.HasKey(ts => ts.Id);
 
+            builder.Property(ts => ts.Id).ValueGeneratedOnAdd();
+
             builder.Property(cc => cc.Name).HasColumnType("VARCHAR(200)").IsRequired();
             builder.Property(cc => cc.Address).HasColumnType("TEXT");
             builder.Property(cc => cc.Tin).HasColumnType("VARCHAR(20)");
-            
+
             builder.Property(cc => cc.DateCreated).HasColumnType("TIMESTAMP");
         }
     }
