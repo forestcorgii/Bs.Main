@@ -1,4 +1,5 @@
-﻿using Bs.Main.Modules.VoucherModule.Entities;
+﻿using Bs.Common;
+using Bs.Main.Modules.VoucherModule.Entities;
 using Bs.Main.Modules.VoucherModule.Models;
 using Bs.Main.Modules.VoucherModule.ViewModels;
 using CommunityToolkit.Mvvm.Input;
@@ -10,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace Bs.Main.Modules.VoucherModule.Commands
 {
-    public class Listing : IRelayCommand
+    public class Listing : CommandBase
     {
         VoucherListingVm ListingVm;
         Vouchers Vouchers;
-        public Listing(VoucherListingVm listingVm, Vouchers vouchers)
+
+        public Listing(VoucherListingVm listingVm, Vouchers vouchers) : base(listingVm)
         {
             ListingVm = listingVm;
-            ListingVm.CanExecuteChanged += ListingVm_CanExecuteChanged;
             Vouchers = vouchers;
         }
 
 
-        public async void Execute(object? parameter)
+        public override async void Execute(object parameter)
         {
             IEnumerable<Voucher> voucher = new List<Voucher>();
             await Task.Run(() =>
@@ -30,14 +31,6 @@ namespace Bs.Main.Modules.VoucherModule.Commands
                 voucher = Vouchers.GetVouchers();
             });
         }
-
-
-
-        public event EventHandler? CanExecuteChanged;
-        public bool CanExecute(object? parameter) => ListingVm.Executable;
-        private void ListingVm_CanExecuteChanged(object? sender, bool e) => NotifyCanExecuteChanged();
-        public void NotifyCanExecuteChanged() =>
-            CanExecuteChanged?.Invoke(this, new EventArgs());
-
+         
     }
 }

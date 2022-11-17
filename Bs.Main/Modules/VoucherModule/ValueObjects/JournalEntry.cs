@@ -10,6 +10,8 @@ namespace Bs.Main.Modules.VoucherModule.ValueObjects
     {
         public int Id { get; set; }
 
+        public string CompanyId { get; set; }
+
         public Guid VoucherId { get; set; }
 
         public string JournalAccountName { get; set; }

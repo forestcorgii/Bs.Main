@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" Grid.Column="0" Content="Add" Command="{Binding Detail}"/>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Vouchers}">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Vouchers}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Journal Account" Binding="{Binding VoucherNumber}"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding PayeeAccountId}"/>
