@@ -9,8 +9,8 @@ namespace Bs.Common
 {
     public class NavigationStore
     {
-        private ObservableObject _currentViewModel;
-        public ObservableObject CurrentViewModel
+        private ViewModelBase _currentViewModel;
+        public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
             set

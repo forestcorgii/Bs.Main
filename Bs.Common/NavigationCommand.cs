@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bs.Common
 {
-    public class NavigateCommand<TViewModel> : IRelayCommand where TViewModel : ObservableObject
+    public class NavigateCommand<TViewModel> : IRelayCommand where TViewModel : ViewModelBase
     {
         private readonly NavigationService<TViewModel> _navigationService;
 
