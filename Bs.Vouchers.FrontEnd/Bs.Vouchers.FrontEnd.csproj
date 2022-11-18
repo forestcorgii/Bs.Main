@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\accept.png" />
+    <None Remove="images\add.png" />
+    <None Remove="images\delete.png" />
+    <None Remove="images\pencil.png" />
+    <None Remove="images\printer.png" />
+    <None Remove="images\world_delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bs.Main\Bs.Main.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\accept.png" />
+    <Resource Include="images\add.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\pencil.png" />
+    <Resource Include="images\printer.png" />
+    <Resource Include="images\world_delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\MainWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
