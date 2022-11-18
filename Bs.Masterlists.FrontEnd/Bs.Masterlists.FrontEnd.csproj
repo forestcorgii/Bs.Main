@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\accept.png" />
+    <None Remove="images\add.png" />
+    <None Remove="images\delete.png" />
+    <None Remove="images\world_delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="images\AddButton.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bs.Main\Bs.Main.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\accept.png" />
+    <Resource Include="images\add.png" />
+    <Resource Include="images\AddButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\world_delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MasterlistMainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\MasterlistMainView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

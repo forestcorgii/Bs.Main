@@ -1,0 +1,25 @@
+﻿<Window x:Class="Bs.Masterlists.FrontEnd.Views.MasterlistMainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bs.Masterlists.FrontEnd.Views"
+        mc:Ignorable="d"
+        Title="MasterlistMainView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Company" Command="{Binding CompanyListing}"/>
+            <Button Content="Company Account" Command="{Binding CompanyAccountListing}"/>
+            <Button Content="Payee" Command="{Binding PayeeListing}"/>
+            <Button Content="Payee Account" Command="{Binding PayeeAccountListing}"/>
+            <Button Content="Journal Account" Command="{Binding JournalAccountListing}"/>
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"
+                            BorderBrush="#FF786F6F" BorderThickness="0.3" Margin="5,0,5,5" 
+            />
+    </Grid>
+</Window>
