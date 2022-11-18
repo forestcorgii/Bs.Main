@@ -8,15 +8,24 @@ using System.Threading.Tasks;
 
 namespace Bs.Main.Modules.MasterlistModule.Models
 {
-    public class Payees
+    public class Payees : IGenericModel
     {
         private PayeeManager Manager;
 
         public Payees(PayeeManager manager) => Manager = manager;
 
 
-        public IEnumerable<Payee> GetPayeeAccounts() => Manager.GetPayees();
-        public void Save(Payee payee) => Manager.SavePayee(payee);
-        public void Delete(Payee payee) => Manager.SavePayee(payee);
+        public IEnumerable<object> Get() => Manager.GetPayees();
+
+        public void Save(object item)
+        {
+            if (item is Payee payee)
+                Manager.SavePayee(payee);
+        }
+        public void Delete(object item)
+        {
+            if (item is Payee payee)
+                Manager.RemovePayee(payee);
+        }
     }
 }

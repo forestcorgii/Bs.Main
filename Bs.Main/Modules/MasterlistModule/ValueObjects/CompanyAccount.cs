@@ -16,9 +16,9 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
         public string AccountNumber { get; set; }
 
 
-        public DateTime DateCreated { get; set; } 
+        public DateTime DateCreated { get; set; }
 
-
+        public CompanyAccount() { }
         public CompanyAccount(string bankName, string code, string accountNumber)
         {
             BankName = bankName;
@@ -34,6 +34,11 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
                 throw new Exception($"{nameof(Code)} should not be blank.");
             if (string.IsNullOrEmpty(AccountNumber))
                 throw new Exception($"{nameof(AccountNumber)} should not be blank.");
+        }
+
+        public override string ToString()
+        {
+            return $"{Code} - {BankName}";
         }
     }
 }

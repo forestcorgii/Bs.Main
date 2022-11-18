@@ -10,11 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Bs.Main.Modules.VoucherModule.Enums;
 
 namespace Bs.Main.Modules.VoucherModule.ViewModels
 {
     public class VoucherListingVm : ViewModelBase
     {
+        public ObservableCollection<VoucherStatus> VoucherStatusOption
+        {
+            get => new ObservableCollection<VoucherStatus>(Enum.GetValues(typeof(VoucherStatus)).Cast<VoucherStatus>());
+        }
+
         public ObservableCollection<Voucher> Vouchers { get; set; }
 
         public ICommand Listing { get; }

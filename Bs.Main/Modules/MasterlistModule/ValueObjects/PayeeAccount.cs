@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 {
@@ -12,14 +13,12 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 
         public string AccountNumber { get; set; }
 
-        public Dictionary<string, string> DefaultParticulars { get; set; }
+        public ObservableCollection<ParticularsKeyValue> DefaultParticulars { get; set; } = new();
 
-        public DateTime DateCreated { get; set; } 
+        public DateTime DateCreated { get; set; }
 
-        public PayeeAccount(string accountNumber)
-        {
-            AccountNumber = accountNumber;
-        }
+
+        public PayeeAccount() { }
 
         public void Validate()
         {

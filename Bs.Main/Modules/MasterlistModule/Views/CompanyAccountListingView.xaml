@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Company:"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" SelectedValue="{Binding SelectedCompanyAccount.BankName}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" SelectedValue="{Binding SelectedCompanyAccount.CompanyId}" ItemsSource="{Binding CompanyIds}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Bank Name:"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedCompanyAccount.BankName}"/>
@@ -37,16 +37,22 @@
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Account Number:"/>
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedCompanyAccount.AccountNumber}"/>
-        
-        
-        <Button Grid.Row="3" Grid.Column="2" Content="Save" Command="{Binding Save}"/>
-        <Button Grid.Row="3" Grid.Column="3" Content="Delete" Command="{Binding Delete}"/>
+
+
+        <Button Grid.Row="3" Grid.Column="2" Command="{Binding Save}" CommandParameter="{Binding SelectedCompanyAccount}" Style="{StaticResource Add}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/images/add.png"/>
+                <TextBlock Text="Add"/>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="3" Content="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedCompanyAccount}"/>
 
         <DataGrid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   ItemsSource="{Binding CompanyAccounts}" 
                   SelectedValue="{Binding SelectedCompanyAccount}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Account Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Company Id" Binding="{Binding CompanyId}"/>
                 <DataGridTextColumn Header="Bank Name" Binding="{Binding BankName}"/>
                 <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>

@@ -19,7 +19,7 @@ namespace Bs.Main.Modules.MasterlistModule.Models
         public void Delete(object item)
         {
             if (item is CompanyAccount companyAccount)
-                Manager.SaveCompanyAccount(companyAccount);
+                Manager.RemoveCompanyAccount(companyAccount);
             else throw new Exception("Object Mismatch");
         }
 

@@ -19,9 +19,9 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
         public JournalEntryDetailVm(VoucherDetailVm voucherDetailVm)
         {
             JournalEntry.Particulars = new();
-            JournalEntry.Particulars.Add("uid", "19823719273");
-            JournalEntry.Particulars.Add("count", "10002");
-            JournalEntry.Particulars.Add("something", "dadalala");
+            JournalEntry.Particulars.Add(new("uid", "19823719273"));
+            JournalEntry.Particulars.Add(new("count", "10002"));
+            JournalEntry.Particulars.Add(new("something", "dadalala"));
         }
 
     }

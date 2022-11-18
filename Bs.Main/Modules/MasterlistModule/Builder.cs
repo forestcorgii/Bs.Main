@@ -45,6 +45,18 @@ namespace Bs.Main.Modules.MasterlistModule
             services.AddSingleton<Func<CompanyAccountListingVm>>((s) => () => s.GetRequiredService<CompanyAccountListingVm>());
             services.AddSingleton<NavigationService<CompanyAccountListingVm>>();
 
+            services.AddSingleton<PayeeListingVm>();
+            services.AddSingleton<Func<PayeeListingVm>>((s) => () => s.GetRequiredService<PayeeListingVm>());
+            services.AddSingleton<NavigationService<PayeeListingVm>>();
+
+            services.AddSingleton<PayeeAccountListingVm>();
+            services.AddSingleton<Func<PayeeAccountListingVm>>((s) => () => s.GetRequiredService<PayeeAccountListingVm>());
+            services.AddSingleton<NavigationService<PayeeAccountListingVm>>();
+
+            services.AddSingleton<JournalAccountListingVm>();
+            services.AddSingleton<Func<JournalAccountListingVm>>((s) => () => s.GetRequiredService<JournalAccountListingVm>());
+            services.AddSingleton<NavigationService<JournalAccountListingVm>>();
+
 
             return services;
         }

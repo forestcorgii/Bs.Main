@@ -36,6 +36,13 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
             context.SaveChanges();
         }
 
+        public void RemoveCompanyAccount(CompanyAccount companyAccount)
+        {
+            using MainContext context = Factory.CreateDbContext();
+            context.CompanyAccounts.Remove(companyAccount);
+            context.SaveChanges();
+        }
+
 
     }
 }

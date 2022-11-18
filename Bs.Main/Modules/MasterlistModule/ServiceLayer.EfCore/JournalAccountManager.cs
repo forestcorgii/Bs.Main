@@ -35,6 +35,13 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
             context.SaveChanges();
         }
 
+        public void RemoveJournalAccount(JournalAccount journalAccount)
+        {
+            using MainContext context = Factory.CreateDbContext();
+            context.JournalAccounts.Remove(journalAccount);
+            context.SaveChanges();
+        }
+
 
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Bs.Common;
+using Bs.Main.Messages;
 using Bs.Main.Modules.MasterlistModule.Commands.Generic;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +22,15 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
 
 
         private ObservableCollection<Company> companies = new();
-        public ObservableCollection<Company> Companies { get => companies; set => SetProperty(ref companies, value); }
+        public ObservableCollection<Company> Companies
+        {
+            get => companies; 
+            set
+            {
+                SetProperty(ref companies, value);
+                Messenger.Send(new CompanyCollectionChanged(companies));
+            }
+        }
 
 
         public ICommand Listing { get; }
@@ -46,6 +56,7 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
             };
 
             CollectionChanged += (s, e) => Companies = new ObservableCollection<Company>(e.Select(o => (Company)o));
+            IsActive = true;
         }
 
 

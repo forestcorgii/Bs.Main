@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,6 @@ namespace Bs.Main.Modules.VoucherModule.ValueObjects
         public double TaxAmount { get => Amount * WithholdingTaxRate; }
         public double NetAmount { get => Amount - TaxAmount; }
 
-        public Dictionary<string, string> Particulars { get; set; }
+        public ObservableCollection<ParticularsKeyValue> Particulars { get; set; }
     }
 }

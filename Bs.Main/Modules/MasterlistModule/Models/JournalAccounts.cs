@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bs.Main.Modules.MasterlistModule.Models
 {
-    public class JournalAccounts
+    public class JournalAccounts : IGenericModel
     {
         private JournalAccountManager Manager;
 
@@ -17,5 +17,18 @@ namespace Bs.Main.Modules.MasterlistModule.Models
         public IEnumerable<JournalAccount> GetJournalAccounts() => Manager.GetJournalAccounts();
         public void Save(JournalAccount journalAccount) => Manager.SaveJournalAccount(journalAccount);
         public void Delete(JournalAccount journalAccount) => Manager.SaveJournalAccount(journalAccount);
+
+        public IEnumerable<object> Get() => Manager.GetJournalAccounts();
+
+        public void Save(object item)
+        {
+            if (item is JournalAccount payee)
+                Manager.SaveJournalAccount(payee);
+        }
+        public void Delete(object item)
+        {
+            if (item is JournalAccount payee)
+                Manager.RemoveJournalAccount(payee);
+        }
     }
 }

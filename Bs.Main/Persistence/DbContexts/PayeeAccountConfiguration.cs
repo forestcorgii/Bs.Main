@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Bs.Main.Persistence.DbContexts
             builder.Property(cc => cc.AccountNumber).HasColumnType("VARCHAR(25)");
             builder.Property(cc => cc.DefaultParticulars).HasColumnType("TEXT").HasConversion(
                 v => JsonConvert.SerializeObject(v),
-                v => JsonConvert.DeserializeObject<Dictionary<string,string>>(v)
+                v => JsonConvert.DeserializeObject<ObservableCollection<ParticularsKeyValue>>(v)
             );
 
             builder.Property(cc => cc.DateCreated).HasColumnType("TIMESTAMP");

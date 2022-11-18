@@ -3,11 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bs.Main.Modules.MainModule.Views"
+        xmlns:local="clr-namespace:Bs.Main.Modules.MainModule.Views" xmlns:viewmodels="clr-namespace:Bs.Main.Modules.MainModule.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MasterlistMainVm}"
         mc:Ignorable="d"
         Title="MasterlistMainView" Height="450" Width="800">
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Company" Command="{Binding CompanyListing}"/>
+            <Button Content="Company Account" Command="{Binding CompanyAccountListing}"/>
+            <Button Content="Payee" Command="{Binding PayeeListing}"/>
+            <Button Content="Payee Account" Command="{Binding PayeeAccountListing}"/>
+            <Button Content="Journal Account" Command="{Binding JournalAccountListing}"/>
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"
                             BorderBrush="#FF786F6F" BorderThickness="0.3" Margin="5,0,5,5" 
             />
     </Grid>

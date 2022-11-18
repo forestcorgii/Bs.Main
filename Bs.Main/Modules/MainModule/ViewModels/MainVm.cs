@@ -1,8 +1,11 @@
 ﻿using Bs.Common;
+using Bs.Main.Messages;
+using Bs.Main.Modules.MainModule.Commands;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using Bs.Main.Modules.VoucherModule.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,7 @@ using System.Windows.Input;
 
 namespace Bs.Main.Modules.MainModule.ViewModels
 {
-    public class MainVm : ObservableObject
+    public class MainVm : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
         public ObservableObject CurrentViewModel => _navigationStore.CurrentViewModel;
@@ -30,13 +33,14 @@ namespace Bs.Main.Modules.MainModule.ViewModels
 
 
 
+
         public MainVm(NavigationStore navigationStore,
             NavigationService<VoucherListingVm> voucherListing,
-            NavigationService<VoucherDetailVm> voucherDetail)
+            NavigationService<VoucherDetailVm> voucherDetail
+            )
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
 
 
             VoucherListing = new NavigateCommand<VoucherListingVm>(voucherListing);
@@ -47,27 +51,27 @@ namespace Bs.Main.Modules.MainModule.ViewModels
 
             SelectCompany = new RelayCommand<string>(OnSelectCompany);
 
-            var payeeAccounts = new List<PayeeAccount>();
-            payeeAccounts.Add(new("1231231643") { PayeeId = Guid.NewGuid() });
-            payeeAccounts.Add(new("2523523529") { PayeeId = Guid.NewGuid() });
-            payeeAccounts.Add(new("0912481123") { PayeeId = Guid.NewGuid() });
-            payeeAccounts.Add(new("0912367162") { PayeeId = Guid.NewGuid() });
-            PayeeAccounts = payeeAccounts;
+            SelectedCompany = WeakReferenceMessenger.Default.Send<CurrentCompany>().Response.Id;
 
-            CompanyDict.Add("MIDCSI00");
-            CompanyDict.Add("MFPOSI02");
-            CompanyDict.Add("MFPOSI04");
-            CompanyDict.Add("LFPOSI00");
-            CompanyDict.Add("Personal");
         }
 
 
-        public List<string> CompanyDict { get; set; } = new();
+        private List<Company> _companies;
+        public List<Company> Companies
+        {
+            get => _companies; 
+            set
+            {
+                Messenger.Send(new CompanyCollectionChanged(value));
+                SetProperty(ref _companies, value);
+            }
+        }
 
         private string _selectedCompany;
         public string SelectedCompany { get => _selectedCompany; set => SetProperty(ref _selectedCompany, value); }
 
         private PayeeAccount _selectedPayeeAccount;
+
         public PayeeAccount SelectedPayeeAccount { get => _selectedPayeeAccount; set => SetProperty(ref _selectedPayeeAccount, value); }
 
         private void OnSelectCompany(string selectedCompanyId) => SelectedCompany = selectedCompanyId;

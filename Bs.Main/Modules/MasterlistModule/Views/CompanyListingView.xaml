@@ -46,6 +46,7 @@
                   ItemsSource="{Binding Companies}" 
                   SelectedValue="{Binding SelectedCompany}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Company Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Acronym" Binding="{Binding Acronym}"/>
                 <DataGridTextColumn Header="Tin" Binding="{Binding Tin}"/>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace Bs.Main.Persistence.DbContexts
 
             builder.Property(v => v.Particulars).HasColumnType("TEXT").HasConversion(
                 v => JsonConvert.SerializeObject(v),
-                v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v)
+                v => JsonConvert.DeserializeObject<ObservableCollection<ParticularsKeyValue>>(v)
             );
         }
     }

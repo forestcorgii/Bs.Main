@@ -20,7 +20,7 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
         public IEnumerable<Company> GetCompanies()
         {
             using var context = Factory.CreateDbContext();
-            return context.Companies.ToList();
+            return context.Companies.Include(c => c.CompanyAccounts).ToList();
         }
 
 
@@ -33,6 +33,13 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
             else
                 context.Add(company);
 
+            context.SaveChanges();
+        }
+
+        public void RemoveCompany(Company company)
+        {
+            using MainContext context = Factory.CreateDbContext();
+            context.Companies.Remove(company);
             context.SaveChanges();
         }
 

@@ -40,5 +40,12 @@ namespace Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore
             context.SaveChanges();
         }
 
+        public void RemovePayeeAccount(PayeeAccount payeeAccount)
+        {
+            using MainContext context = Factory.CreateDbContext();
+            context.PayeeAccounts.Remove(payeeAccount);
+            context.SaveChanges();
+        }
+
     }
 }

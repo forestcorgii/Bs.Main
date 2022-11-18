@@ -13,9 +13,8 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 
         public double Rate { get; set; }
 
-        public JournalAccount(string name)
+        public JournalAccount()
         {
-            Name = name;
         }
 
         public void Validate()

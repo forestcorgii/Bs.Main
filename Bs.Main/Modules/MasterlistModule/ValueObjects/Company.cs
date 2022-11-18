@@ -17,6 +17,9 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 
         public DateTime DateCreated { get; set; }
 
+        public IEnumerable<CompanyAccount> CompanyAccounts { get; set; }
+
+
         public Company() { }
         public Company(string name, string acronym, string tin, string branchCode)
         {
@@ -42,6 +45,11 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
                 throw new Exception($"{nameof(Tin)} should not be blank.");
             if (string.IsNullOrEmpty(BranchCode))
                 throw new Exception($"{nameof(BranchCode)} should not be blank.");
+        }
+
+        public override string ToString()
+        {
+            return Id;
         }
     }
 }

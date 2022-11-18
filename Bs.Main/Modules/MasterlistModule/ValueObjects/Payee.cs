@@ -17,7 +17,9 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 
         public string Remarks { get; set; }
 
-        public DateTime DateCreated { get; set; } 
+        public DateTime DateCreated { get; set; }
+
+        public Payee() { }
         public Payee(string payeeName)
         {
             Id = Guid.NewGuid();
@@ -31,6 +33,11 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
                 throw new Exception($"{nameof(PayeeName)} should not be blank.");
         }
 
+
+        public override string ToString()
+        {
+            return PayeeName;
+        }
 
     }
 }
