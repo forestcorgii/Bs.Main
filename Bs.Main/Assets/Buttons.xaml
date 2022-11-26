@@ -28,7 +28,7 @@
                 <ControlTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/images/add.png" Stretch="Uniform" Width="20"/>
-                        <ContentPresenter Content="{TemplateBinding Button.Content}" />
+                        <ContentPresenter Content="{TemplateBinding Button.Content}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -50,6 +50,21 @@
         <Setter Property="ToolTip" Value="Edit"/>
     </Style>
 
+
+    <Style x:Key="Reload" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/images/arrow_refresh.png" Stretch="Uniform" Width="20"/>
+                        <ContentPresenter Content="{TemplateBinding Button.Content}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ToolTip" Value="Edit"/>
+    </Style>
+
     <Style x:Key="Print" TargetType="Button" BasedOn="{StaticResource IconButton}">
         <Setter Property="Template">
             <Setter.Value>
@@ -61,6 +76,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ToolTip" Value="Edit"/>
+        <Setter Property="ToolTip" Value="Print"/>
     </Style>
 </ResourceDictionary>

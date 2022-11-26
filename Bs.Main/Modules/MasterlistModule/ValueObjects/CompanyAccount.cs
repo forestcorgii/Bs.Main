@@ -38,7 +38,7 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
 
         public override string ToString()
         {
-            return $"{Code} - {BankName}";
+            return Code;
         }
     }
 }

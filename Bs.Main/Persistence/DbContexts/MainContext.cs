@@ -75,6 +75,12 @@ namespace Bs.Main.Persistence.DbContexts
                     if (entry.State == EntityState.Added)
                         ((PayeeAccount)entry.Entity).DateCreated = DateTime.Now;
                 }
+                else if (entry.Entity is Voucher)
+                {
+                    //((PayeeAccount)entry.Entity).DateModified = DateTime.Now;
+                    if (entry.State == EntityState.Added)
+                        ((Voucher)entry.Entity).DateCreated = DateTime.Now;
+                }
                 //else if (entry.Entity is JournalAccount)
                 //{
                 //    ((JournalAccount)entry.Entity).DateModified = DateTime.Now;

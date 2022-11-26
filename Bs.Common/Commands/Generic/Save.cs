@@ -1,14 +1,13 @@
 ﻿using Bs.Common;
-using Bs.Main.Modules.MasterlistModule.Models;
-using Bs.Main.Modules.MasterlistModule.ValueObjects;
-using Bs.Main.Modules.MasterlistModule.ViewModels;
+using Bs.Common.Models;
+using Bs.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
+namespace Bs.Common.Commands.Generic
 {
     public class Save : CommandBase
     {
@@ -23,8 +22,12 @@ namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
 
         public override void Execute(object parameter)
         {
-            Model.Save(parameter);
-            Vm.Reload();
+            try
+            {
+                Model.Save(parameter);
+                Vm.Reload();
+            }
+            catch (Exception ex) { MessageBoxes.Error(ex.Message); }
         }
     }
 }

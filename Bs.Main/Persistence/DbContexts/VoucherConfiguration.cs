@@ -27,6 +27,9 @@ namespace Bs.Main.Persistence.DbContexts
 
             builder.Property(v => v.DateCreated).HasColumnType("DATETIME");
             builder.Property(v => v.DateModified).HasColumnType("DATETIME");
+            
+            
+            
         }
     }
 }

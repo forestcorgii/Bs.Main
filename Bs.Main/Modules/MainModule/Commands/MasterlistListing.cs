@@ -1,4 +1,5 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands;
 using Bs.Common.Utils;
 using Bs.Main.Modules.MainModule.ViewModels;
 using Bs.Main.Modules.MasterlistModule.Models;

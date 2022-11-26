@@ -1,6 +1,6 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands.Generic;
 using Bs.Main.Messages;
-using Bs.Main.Modules.MasterlistModule.Commands.Generic;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using CommunityToolkit.Mvvm.Messaging;
@@ -51,9 +51,7 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
             CollectionChanged += (s, e) => CompanyAccounts = new ObservableCollection<CompanyAccount>(e.Select(o => (CompanyAccount)o));
 
 
-            var companiesMessage = WeakReferenceMessenger.Default.Send<CurrentCompanyCollection>();
-            if (companiesMessage.HasReceivedResponse)
-                CompanyIds = companiesMessage.Response.Select(c => c.Id);
+            CompanyIds = WeakReferenceMessenger.Default.Send<CurrentCompanyCollection>().Response.Select(c => c.Id);
             IsActive = true;
 
         }

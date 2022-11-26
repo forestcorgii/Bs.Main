@@ -14,8 +14,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-                
+
                 <ResourceDictionary Source="/Bs.Main;component/Assets/Buttons.xaml" />
+                <ResourceDictionary Source="/Bs.Main;component/Assets/ListBoxes.xaml" />
+                <ResourceDictionary Source="/Bs.Main;component/Assets/TextBlocks.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
@@ -46,13 +48,7 @@
 
 
 
-
-
-            <Style TargetType="TextBlock">
-                <Setter Property="Margin" Value="8"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>
+ 
             <Style TargetType="ComboBox">
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Height" Value="35"/>
@@ -66,7 +62,6 @@
                 <Setter Property="Margin" Value="3"/>
                 <Setter Property="Padding" Value="3"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style x:Key="LongText" TargetType="TextBox">
                 <Setter Property="Width" Value="auto"/>
@@ -83,29 +78,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
-            <Style x:Key="Add" TargetType="Button">
-                <Setter Property="Content">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Grid>
-                                <Border CornerRadius="3"
-                                        BorderThickness="2"
-                                        BorderBrush="Green">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="/images/Delete.png"/>
-                                        <ContentPresenter Content="{TemplateBinding Button.Content}" />
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Margin" Value="3"/>
-                <Setter Property="Padding" Value="16 0"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>
+            
 
 
         </ResourceDictionary>

@@ -27,7 +27,7 @@
 
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LongText}" Text="{Binding SelectedJournalAccount.Name}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" CharacterCasing="Upper" Style="{StaticResource LongText}" Text="{Binding SelectedJournalAccount.Name}"/>
         
         <Button Grid.Row="1" Grid.Column="4" Content="Save" Command="{Binding Save}" CommandParameter="{Binding SelectedJournalAccount}"/>
         <Button Grid.Row="1" Grid.Column="5" Content="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedJournalAccount}"/>

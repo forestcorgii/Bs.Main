@@ -20,6 +20,13 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.EfCore
             Factory = factory;
         }
 
+        public string GenerateVoucherNumber(string companyId)
+        {
+            using MainContext context = Factory.CreateDbContext();
+            int companyVoucherCount = context.Vouchers.Count(v => v.CompanyId == companyId);
+            return $"{companyId}{companyVoucherCount + 1:0000}";
+        }
+
         public IEnumerable<Voucher> GetVouchers()
         {
             using MainContext context = Factory.CreateDbContext();

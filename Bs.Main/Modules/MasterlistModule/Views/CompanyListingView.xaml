@@ -27,9 +27,9 @@
 
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedCompany.Name}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" CharacterCasing="Upper" Text="{Binding SelectedCompany.Name}"/>
         <TextBlock Grid.Row="1" Grid.Column="2" Text="Acronym:"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SelectedCompany.Acronym}"/>
+        <TextBox Grid.Row="1" Grid.Column="3" CharacterCasing="Upper" Text="{Binding SelectedCompany.Acronym}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Tin:"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedCompany.Tin}"/>

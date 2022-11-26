@@ -9,12 +9,9 @@
   <ItemGroup>
     <None Remove="images\accept.png" />
     <None Remove="images\add.png" />
+    <None Remove="images\arrow_refresh.png" />
     <None Remove="images\delete.png" />
     <None Remove="images\world_delete.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Remove="images\AddButton.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,9 +41,7 @@
   <ItemGroup>
     <Resource Include="images\accept.png" />
     <Resource Include="images\add.png" />
-    <Resource Include="images\AddButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
+    <Resource Include="images\arrow_refresh.png" />
     <Resource Include="images\delete.png" />
     <Resource Include="images\world_delete.png" />
   </ItemGroup>
@@ -82,6 +77,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Assets\ListBoxes.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Assets\TextBlocks.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Modules\VoucherModule\Views\SelectCompanyAccountWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -94,6 +97,10 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\MasterlistModule\Commands\" />
   </ItemGroup>
 
 </Project>

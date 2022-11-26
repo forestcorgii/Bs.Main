@@ -31,9 +31,9 @@
         <ComboBox Grid.Row="1" Grid.Column="1" SelectedValue="{Binding SelectedCompanyAccount.CompanyId}" ItemsSource="{Binding CompanyIds}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Bank Name:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedCompanyAccount.BankName}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" CharacterCasing="Upper" Text="{Binding SelectedCompanyAccount.BankName}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="Code:"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Width="85" Text="{Binding SelectedCompanyAccount.Code}"/>
+        <TextBox Grid.Row="2" Grid.Column="3" CharacterCasing="Upper" Width="85" Text="{Binding SelectedCompanyAccount.Code}"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Account Number:"/>
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedCompanyAccount.AccountNumber}"/>

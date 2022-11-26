@@ -29,9 +29,9 @@
 
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Payee Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LongText}" Text="{Binding SelectedPayee.PayeeName}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" CharacterCasing="Upper" Style="{StaticResource LongText}" Text="{Binding SelectedPayee.PayeeName}"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Owner Name:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource LongText}" Text="{Binding SelectedPayee.OwnerName}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" CharacterCasing="Upper" Style="{StaticResource LongText}" Text="{Binding SelectedPayee.OwnerName}"/>
         
         <Button Grid.Row="2" Grid.Column="4" Content="Save" Command="{Binding Save}" CommandParameter="{Binding SelectedPayee}"/>
         <Button Grid.Row="2" Grid.Column="5" Content="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedPayee}"/>

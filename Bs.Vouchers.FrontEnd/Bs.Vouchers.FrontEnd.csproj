@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="images\accept.png" />
     <None Remove="images\add.png" />
+    <None Remove="images\arrow_refresh.png" />
     <None Remove="images\delete.png" />
     <None Remove="images\pencil.png" />
     <None Remove="images\printer.png" />
@@ -26,10 +27,17 @@
   <ItemGroup>
     <Resource Include="images\accept.png" />
     <Resource Include="images\add.png" />
+    <Resource Include="images\arrow_refresh.png" />
     <Resource Include="images\delete.png" />
     <Resource Include="images\pencil.png" />
     <Resource Include="images\printer.png" />
     <Resource Include="images\world_delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\voucher template.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

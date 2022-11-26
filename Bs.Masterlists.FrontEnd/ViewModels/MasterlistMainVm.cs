@@ -90,6 +90,15 @@ namespace Bs.Masterlists.FrontEnd.ViewModels
         }
 
 
+
+
+        protected override void OnActivated()
+        {
+            Messenger.Register<MasterlistMainVm, CurrentCompanyCollection>(this, (r, m) => m.Reply(r.Companies));
+            Messenger.Register<MasterlistMainVm, CurrentPayeeCollection>(this, (r, m) => m.Reply(r.Payees));
+        }
+
+
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));

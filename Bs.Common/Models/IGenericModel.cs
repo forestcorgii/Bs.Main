@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bs.Main.Modules.MasterlistModule.Models
+namespace Bs.Common.Models
 {
     public interface IGenericModel
     {

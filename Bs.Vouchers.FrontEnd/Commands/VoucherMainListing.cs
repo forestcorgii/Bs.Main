@@ -1,4 +1,5 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using Bs.Vouchers.FrontEnd.ViewModels;
@@ -14,14 +15,16 @@ namespace Bs.Vouchers.FrontEnd.Commands
     {
         private Companies Companies;
         private PayeeAccounts PayeeAccounts;
+        private JournalAccounts JournalAccounts;
 
         private MainVm Vm;
 
-        public VoucherMainListing(MainVm vm, Companies companies, PayeeAccounts payeeAccounts) : base(vm)
+        public VoucherMainListing(MainVm vm, Companies companies, PayeeAccounts payeeAccounts, JournalAccounts journalAccounts) : base(vm)
         {
             Companies = companies;
             Vm = vm;
             PayeeAccounts = payeeAccounts;
+            JournalAccounts = journalAccounts;
         }
 
         public async override void Execute(object parameter)
@@ -38,12 +41,15 @@ namespace Bs.Vouchers.FrontEnd.Commands
                 //companyAccounts = Companies.Get().Select(c => (CompanyAccount)c);
                 //payees = Payees.Get().Select(c => (Payee)c);
                 payeeAccounts = PayeeAccounts.Get().Select(c => (PayeeAccount)c);
-                //journalAccounts = JournalAccounts.Get().Select(c => (JournalAccount)c);
+                journalAccounts = JournalAccounts.Get().Select(c => (JournalAccount)c);
             });
 
             Vm.Companies = companies;
-            Vm.PayeeAccounts= payeeAccounts;
+            Vm.PayeeAccounts = payeeAccounts;
+            Vm.JournalAccounts = journalAccounts;
 
+            Vm.SelectedCompany = companies.FirstOrDefault();
+            Vm.SelectedPayeeAccount = payeeAccounts.FirstOrDefault();
         }
     }
 }

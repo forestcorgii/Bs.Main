@@ -1,6 +1,6 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands.Generic;
 using Bs.Main.Messages;
-using Bs.Main.Modules.MasterlistModule.Commands.Generic;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using CommunityToolkit.Mvvm.Input;
@@ -17,23 +17,18 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
 {
     public class PayeeAccountListingVm : ViewModelBase
     {
+        #region PROPERTIES
         private PayeeAccount _selectedPayeeAccount = new();
-        public PayeeAccount SelectedPayeeAccount
-        {
-            get => _selectedPayeeAccount; 
-            set
-            {
-           
-                SetProperty(ref _selectedPayeeAccount, value);
-            }
-        }
+        public PayeeAccount SelectedPayeeAccount { get => _selectedPayeeAccount; set => SetProperty(ref _selectedPayeeAccount, value); }
 
         private ObservableCollection<PayeeAccount> _payeeAccounts;
         public ObservableCollection<PayeeAccount> PayeeAccounts { get => _payeeAccounts; set => SetProperty(ref _payeeAccounts, value); }
 
         private IEnumerable<Payee> _payeeIds;
         public IEnumerable<Payee> PayeeIds { get => _payeeIds; set => SetProperty(ref _payeeIds, value); }
+        #endregion
 
+        #region COMMANDS
         public ICommand Save { get; }
         public ICommand Delete { get; }
 
@@ -41,13 +36,23 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
 
         public ICommand AddParticularItem { get; }
         public ICommand RemoveParticularItem { get; }
+        #endregion
+
+        #region LAMBDAS
+        private void HandleLambdas()
+        {
+            OnReloadRequest += (s, e) =>
+            {
+                SelectedPayeeAccount = new();
+                Listing.Execute(null);
+            };
+
+            CollectionChanged += (s, e) => PayeeAccounts = new ObservableCollection<PayeeAccount>(e.Select(o => (PayeeAccount)o));
+        }
+        #endregion
 
         public PayeeAccountListingVm(PayeeAccounts payeeAccounts)
         {
-            var payeesMessage= WeakReferenceMessenger.Default.Send<CurrentPayeeCollection>();
-            if (payeesMessage.HasReceivedResponse)
-                PayeeIds = payeesMessage.Response;
-
             Listing = new Listing(this, payeeAccounts);
             Listing.Execute(null);
 
@@ -57,17 +62,14 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
             Save = new Save(this, payeeAccounts);
             Delete = new Delete(this, payeeAccounts);
 
-            OnReloadRequest += (s, e) =>
-            {
-                SelectedPayeeAccount = new();
-                Listing.Execute(null);
-            };
-
-            CollectionChanged += (s, e) => PayeeAccounts = new ObservableCollection<PayeeAccount>(e.Select(o => (PayeeAccount)o));
-
+            HandleLambdas();
 
             IsActive = true;
+
+            PayeeIds = WeakReferenceMessenger.Default.Send<CurrentPayeeCollection>().Response;
         }
+
+
 
         protected override void OnActivated()
         {

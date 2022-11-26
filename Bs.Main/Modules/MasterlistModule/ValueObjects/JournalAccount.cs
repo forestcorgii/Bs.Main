@@ -23,5 +23,10 @@ namespace Bs.Main.Modules.MasterlistModule.ValueObjects
                 throw new Exception($"{nameof(Name)} should not be blank.");
 
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

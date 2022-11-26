@@ -1,15 +1,13 @@
 ﻿using Bs.Common;
+using Bs.Common.Models;
 using Bs.Common.Utils;
-using Bs.Main.Modules.MasterlistModule.Models;
-using Bs.Main.Modules.MasterlistModule.ValueObjects;
-using Bs.Main.Modules.MasterlistModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
+namespace Bs.Common.Commands.Generic
 {
     public class Delete : CommandBase
     {
@@ -24,10 +22,14 @@ namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
 
         public override void Execute(object parameter)
         {
-            if (MessageBoxes.Inquire("Sure?"))
-                Model.Delete(parameter);
-            
-            Vm.Reload();
+            try
+            {
+                if (MessageBoxes.Inquire("Sure?"))
+                    Model.Delete(parameter);
+
+                Vm.Reload();
+            }
+            catch (Exception ex) { MessageBoxes.Error(ex.Message); }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Bs.Common;
-using Bs.Main.Modules.MasterlistModule.Models;
-using Bs.Main.Modules.MasterlistModule.ValueObjects;
-using Bs.Main.Modules.MasterlistModule.ViewModels;
+using Bs.Common.Models;
+using Bs.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
+namespace Bs.Common.Commands.Generic
 {
     public class Listing : CommandBase
     {
@@ -22,13 +21,17 @@ namespace Bs.Main.Modules.MasterlistModule.Commands.Generic
         }
 
 
-        public override async void Execute(object parameter)
+        public override async void Execute(object? parameter)
         {
-            IEnumerable<object> items = new List<object>();
-            
-            await Task.Run(() => { items = Model.Get(); });
+            try
+            {
+                IEnumerable<object> items = new List<object>();
 
-            Vm.NotifyCollectionChanged(items);
+                await Task.Run(() => { items = Model.Get(); });
+
+                Vm.NotifyCollectionChanged(items);
+            }
+            catch (Exception ex) { MessageBoxes.Error(ex.Message); }
         }
     }
 }

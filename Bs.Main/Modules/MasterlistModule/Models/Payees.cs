@@ -1,4 +1,5 @@
-﻿using Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore;
+﻿using Bs.Common.Models;
+using Bs.Main.Modules.MasterlistModule.ServiceLayer.EfCore;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using System;
 using System.Collections.Generic;

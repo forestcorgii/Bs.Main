@@ -40,12 +40,12 @@
             <Setter Property="Padding" Value="12 6"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-       
+
     </UserControl.Resources>
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -58,22 +58,22 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Voucher Number:"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Voucher.VoucherNumber}"/>
+        <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding Voucher.VoucherNumber}"/>
 
         <TextBlock Grid.Column="2" Grid.Row="0" Text="Entry Date:"/>
         <DatePicker Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"  SelectedDate="{Binding Voucher.EntryDate}"/>
 
-        
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Company Account:"/>
-        <ComboBox Grid.Column="1" Grid.Row="1" SelectedValue="{Binding Voucher.CompanyId}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Text="{Binding Voucher.CompanyAccountCode}" />
 
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Payee Account:"/>
-        <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" Text="{Binding Voucher.PayeeAccountId}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" Text="{Binding Voucher.PayeeAccount.AccountNumber}"/>
         <CheckBox Grid.Column="2" Grid.Row="2" Content="Use Owner name" IsChecked="{Binding Voucher.UseOwnerName}"/>
-        <TextBlock Grid.Column="3" Grid.Row="2" Style="{StaticResource PreviewTb}" Text="Supplier Account"/>
+        <TextBlock Grid.Column="3" Grid.Row="2" Style="{StaticResource PreviewTb}" Text="{Binding Voucher.PayeeNameToUse}"/>
 
         <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="5" Margin="8">
             <Grid.RowDefinitions>
@@ -82,38 +82,40 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Button Content="Add" HorizontalAlignment="Right" Command="{Binding JournalDetail}"/>
+            <Button Content="Add Journal Entry" HorizontalAlignment="Right" Style="{StaticResource Add}" Command="{Binding JournalDetail}"/>
 
-            <DataGrid Grid.Row="1" Height="125" ItemsSource="{Binding Voucher.JournalEntries}">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Voucher.JournalEntries}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Margin="3,1" Style="{StaticResource Edit}" Command="{Binding DataContext.JournalDetail,ElementName=main}" CommandParameter="{Binding }"/>
+                                    <Button Margin="3,1" Style="{StaticResource Delete}" Command="{Binding DataContext.RemoveJournal,ElementName=main}" CommandParameter="{Binding }"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Journal Account" Binding="{Binding JournalAccountName}"/>
                     <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
                     <DataGridTextColumn Header="W.Tax" Binding="{Binding WithholdingTaxRate}"/>
-                    <DataGridTemplateColumn >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Margin="3,1" Content="Detail" Command="{Binding DataContext.JournalDetail,ElementName=main}" CommandParameter="{Binding }"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Margin="3,1" Content="Delete" Command="{Binding DataContext.JournalDetail,ElementName=main}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBlock Text="Gross Amount:"/>
-                <TextBox />
+                <TextBox IsReadOnly="True"/>
                 <TextBlock Text="Total W.Tax:"/>
-                <TextBox />
+                <TextBox IsReadOnly="True"/>
                 <TextBlock Text="Net Amount:"/>
-                <TextBox />
+                <TextBox IsReadOnly="True"/>
             </StackPanel>
+
         </Grid>
+        
+        <Button Grid.Row="6" Grid.Column="3" Content="Save" HorizontalAlignment="Right" Command="{Binding Save}" CommandParameter="{Binding Voucher}"/>
+        
+        
+        
     </Grid>
 </UserControl>

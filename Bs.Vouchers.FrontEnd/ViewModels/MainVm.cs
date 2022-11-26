@@ -31,10 +31,12 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
         public ICommand PayeeListing { get; }
         public ICommand VoucherDetail { get; }
 
+        public ICommand ReloadFilters { get; }
 
 
 
-        public MainVm(NavigationStore navigationStore, Companies companies, PayeeAccounts payeeAccounts,
+
+        public MainVm(NavigationStore navigationStore, Companies companies, PayeeAccounts payeeAccounts, JournalAccounts journalAccounts,
             NavigationService<VoucherListingVm> voucherListing,
             NavigationService<VoucherDetailVm> voucherDetail
             )
@@ -49,13 +51,17 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             VoucherDetail = new NavigateCommand<VoucherDetailVm>(voucherDetail);
 
 
-            SelectCompany = new RelayCommand<Company>(OnSelectCompany);
+            SelectCompany = new RelayCommand<Company>((c) => SelectedCompany = c);
 
-            VoucherMainListing = new VoucherMainListing(this, companies, payeeAccounts);
+            VoucherMainListing = new VoucherMainListing(this, companies, payeeAccounts, journalAccounts);
             VoucherMainListing.Execute(null);
+
+            ReloadFilters = new RelayCommand(() => VoucherMainListing.Execute(null));
+
+            IsActive = true;
         }
 
-
+        #region Properties
         private IEnumerable<Company> _companies;
         public IEnumerable<Company> Companies
         {
@@ -67,10 +73,27 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             }
         }
 
+        private IEnumerable<JournalAccount> _journalAccounts;
+        public IEnumerable<JournalAccount> JournalAccounts
+        {
+            get => _journalAccounts;
+            set
+            {
+                SetProperty(ref _journalAccounts, value);
+                Messenger.Send(new JournalAccountCollectionChanged(value));
+            }
+        }
 
         private IEnumerable<CompanyAccount> _companyAccounts;
-        public IEnumerable<CompanyAccount> CompanyAccounts { get => _companyAccounts; set => SetProperty(ref _companyAccounts, value); }
-
+        public IEnumerable<CompanyAccount> CompanyAccounts
+        {
+            get => _companyAccounts;
+            set
+            {
+                SetProperty(ref _companyAccounts, value);
+                SelectedCompanyAccount = _companyAccounts.FirstOrDefault();
+            }
+        }
 
         private IEnumerable<PayeeAccount> _payeeAccounts;
         public IEnumerable<PayeeAccount> PayeeAccounts
@@ -83,8 +106,6 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             }
         }
 
-
-
         private Company _selectedCompany;
         public Company SelectedCompany
         {
@@ -92,16 +113,46 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             set
             {
                 SetProperty(ref _selectedCompany, value);
-                CompanyAccounts = _selectedCompany.CompanyAccounts;
+                if (_selectedCompany is not null)
+                {
+                    CompanyAccounts = _selectedCompany.CompanyAccounts;
+                    Messenger.Send(new SelectedCompanyChanged(_selectedCompany));
+                }
+            }
+        }
+
+        private CompanyAccount _selectedCompanyAccount;
+        public CompanyAccount SelectedCompanyAccount
+        {
+            get => _selectedCompanyAccount;
+            set
+            {
+                SetProperty(ref _selectedCompanyAccount, value);
+                if (_selectedCompanyAccount is not null)
+                    Messenger.Send(new SelectedCompanyAccountChanged(_selectedCompanyAccount));
             }
         }
 
         private PayeeAccount _selectedPayeeAccount;
+        public PayeeAccount SelectedPayeeAccount
+        {
+            get => _selectedPayeeAccount; set
+            {
+                SetProperty(ref _selectedPayeeAccount, value);
+                if (_selectedPayeeAccount is not null)
+                    Messenger.Send(new SelectedPayeeAccountChanged(_selectedPayeeAccount));
+            }
+        }
+        #endregion
 
-        public PayeeAccount SelectedPayeeAccount { get => _selectedPayeeAccount; set => SetProperty(ref _selectedPayeeAccount, value); }
+        protected override void OnActivated()
+        {
+            Messenger.Register<MainVm, CurrentCompany>(this, (r, m) => m.Reply(r.SelectedCompany));
+            Messenger.Register<MainVm, CurrentCompanyAccount>(this, (r, m) => m.Reply(r.SelectedCompanyAccount));
+            Messenger.Register<MainVm, CurrentPayeeAccount>(this, (r, m) => m.Reply(r.SelectedPayeeAccount));
+            Messenger.Register<MainVm, CurrentJournalAccountCollection>(this, (r, m) => m.Reply(r.JournalAccounts));
 
-        private void OnSelectCompany(Company selectedCompanyId) => SelectedCompany = selectedCompanyId;
-
+        }
 
 
         private void OnCurrentViewModelChanged() =>

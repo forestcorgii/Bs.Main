@@ -34,7 +34,7 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
             string payeeName = voucher.UseOwnerName ? voucher.Payee.OwnerName : voucher.Payee.PayeeName;
             string parsumm = $"Representing Payment for: {string.Join(", ", voucher.JournalEntries.Select(j => j.JournalAccountName).ToArray())}";
             double netTotal = voucher.JournalEntries.Sum(a => a.NetAmount);
-            double grossTotal = voucher.JournalEntries.Sum(a => a.Amount);
+            double grossTotal = (double)voucher.JournalEntries.Sum(a => a.Amount);
 
 
             foreach (int partAdjustment in new[] { 0, 38 })
@@ -58,13 +58,13 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
                     IRow journalLineRow = sheet.GetRow(Append(ref particularsIndex) + partAdjustment);
                     journalLineRow.Cells[1].SetCellValue(d.JournalAccountName);
                     journalLineRow.Cells[9].SetCellValue("PHP");
-                    journalLineRow.Cells[10].SetCellValue(d.Amount);
+                    journalLineRow.Cells[10].SetCellValue((double)d.Amount);
 
 
                     // CHART OF ACCOUNTS
                     IRow coaRow = sheet.GetRow(Append(ref chartOfAccountsIndex) + partAdjustment);
                     coaRow.Cells[0].SetCellValue(d.JournalAccountName);
-                    coaRow.Cells[4].SetCellValue(d.Amount);
+                    coaRow.Cells[4].SetCellValue((double)d.Amount);
 
                     if (d.TaxAmount > 0d)
                     {

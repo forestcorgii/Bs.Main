@@ -25,5 +25,11 @@ namespace Bs.Main.Modules.VoucherModule.ValueObjects
         public double NetAmount { get => Amount - TaxAmount; }
 
         public ObservableCollection<ParticularsKeyValue> Particulars { get; set; }
+
+
+        public void Validate()
+        {
+            if(WithholdingTaxRate > 1) { }
+        }
     }
 }

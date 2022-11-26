@@ -28,6 +28,6 @@ namespace Bs.Main.Modules.VoucherModule.Views
         {
             DialogResult = true;
             Close();
-        }
+        } 
     }
 }

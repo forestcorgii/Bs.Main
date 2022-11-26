@@ -25,13 +25,9 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.EfCore
             if (context.Vouchers.Any(v => v.Id == voucher.Id))
                 context.Update(voucher);
             else
-            {
-                int companyVoucherCount = context.Vouchers.Count(v => v.CompanyId == voucher.CompanyId);
-                voucher.VoucherNumber = $"{voucher.CompanyId}{companyVoucherCount + 1:0000}";
                 context.Add(voucher);
-            }
-
             context.SaveChanges();
+
             SaveJournalEntries(voucher.JournalEntries, voucher.Id);
         }
 
@@ -45,8 +41,8 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.EfCore
                     context.JournalEntries.Add(entry);
                 else context.JournalEntries.Update(entry);
             }
-
             context.SaveChanges();
+
         }
 
 

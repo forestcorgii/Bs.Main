@@ -1,6 +1,6 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands.Generic;
 using Bs.Main.Messages;
-using Bs.Main.Modules.MasterlistModule.Commands.Generic;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
 using CommunityToolkit.Mvvm.Messaging;

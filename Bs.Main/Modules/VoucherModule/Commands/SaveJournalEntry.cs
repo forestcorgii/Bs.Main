@@ -1,4 +1,5 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands;
 using Bs.Main.Modules.VoucherModule.ViewModels;
 using System;
 using System.Collections.Generic;

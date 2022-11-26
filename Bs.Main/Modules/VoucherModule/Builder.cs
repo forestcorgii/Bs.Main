@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Bs.Main.Modules.VoucherModule.ServiceLayer.Files;
 
 namespace Bs.Main.Modules.VoucherModule
 {
@@ -27,13 +28,14 @@ namespace Bs.Main.Modules.VoucherModule
 
             services.AddSingleton<VoucherManager>();
             services.AddSingleton<VoucherProvider>();
-            
+            services.AddSingleton<VoucherPrinter>();
 
-            services.AddSingleton<VoucherListingVm>();
+
+            services.AddTransient<VoucherListingVm>();
             services.AddSingleton<Func<VoucherListingVm>>((s) => () => s.GetRequiredService<VoucherListingVm>());
             services.AddSingleton<NavigationService<VoucherListingVm>>();
 
-            services.AddSingleton<VoucherDetailVm>();
+            services.AddTransient<VoucherDetailVm>();
             services.AddSingleton<Func<VoucherDetailVm>>((s) => () => s.GetRequiredService<VoucherDetailVm>());
             services.AddSingleton<NavigationService<VoucherDetailVm>>();
 

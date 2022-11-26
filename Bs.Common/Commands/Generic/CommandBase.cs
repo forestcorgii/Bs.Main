@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bs.Common
+namespace Bs.Common.Commands
 {
     public class CommandBase : IRelayCommand
     {

@@ -1,4 +1,5 @@
 ﻿using Bs.Common;
+using Bs.Common.Commands;
 using Bs.Common.Utils;
 using Bs.Main.Modules.MasterlistModule.Models;
 using Bs.Main.Modules.MasterlistModule.ValueObjects;
@@ -38,7 +39,7 @@ namespace Bs.Masterlists.FrontEnd.Commands
         }
 
 
-        public async override void Execute(object parameter)
+        public async override void Execute(object? parameter)
         {
             try
             {
