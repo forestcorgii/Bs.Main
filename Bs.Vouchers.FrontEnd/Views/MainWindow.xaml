@@ -24,85 +24,85 @@
         </Button>
 
         <Border Grid.Row="1" BorderBrush="#FF786F6F" BorderThickness="0.7" Margin="5,0,5,5">
-        <Grid Width="300" Margin="8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition MinHeight="100" Height="auto"/>
-                <RowDefinition MinHeight="100" Height="auto"/>
-                <RowDefinition />
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+            <Grid Width="300" Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition MinHeight="100" Height="auto"/>
+                    <RowDefinition MinHeight="100" Height="auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Margin="8"
+                <Button Grid.Row="0" Margin="8"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top" 
                     Style="{StaticResource Reload}" 
                     Command="{Binding ReloadFilters}" />
-            
-            
-            <StackPanel Grid.Row="1">
-                <TextBlock Text="Company" Style="{StaticResource Header2}" HorizontalAlignment="Left"/>
-                <ListBox ItemsSource="{Binding Companies}" 
+
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Company" Style="{StaticResource Header2}" HorizontalAlignment="Left"/>
+                    <ListBox ItemsSource="{Binding Companies}" 
                          SelectedItem="{Binding SelectedCompany}"
                          ItemContainerStyle="{StaticResource DefaultListBox}"
                          Background="Transparent">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
-                </ListBox>
-            </StackPanel>
-            <StackPanel Grid.Row="2" >
-                <TextBlock Text="Company Account" Style="{StaticResource Header2}" HorizontalAlignment="Left"/>
-                <ListBox ItemsSource="{Binding CompanyAccounts}" 
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2" >
+                    <TextBlock Text="Company Account" Style="{StaticResource Header2}" HorizontalAlignment="Left"/>
+                    <ListBox ItemsSource="{Binding CompanyAccounts}" 
                          SelectedItem="{Binding SelectedCompanyAccount}"
                          Background="Transparent" 
                          ItemContainerStyle="{StaticResource DefaultListBox}" >
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-            </StackPanel>
-            <Grid Grid.Row="3" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Payee Account" Grid.ColumnSpan="2" Style="{StaticResource Header2}"/>
-                <TextBlock Grid.Row="1" Text="Search:" Style="{StaticResource Default}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LongText}" />
-                <ListBox Grid.Row="2" Grid.ColumnSpan="2"
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </StackPanel>
+                <Grid Grid.Row="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Payee Account" Grid.ColumnSpan="2" Style="{StaticResource Header2}"/>
+                    <TextBlock Grid.Row="1" Text="Search:" Style="{StaticResource Default}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LongText}" Text="{Binding  Path=PayeeAccountSearchInput, UpdateSourceTrigger=PropertyChanged, Delay=150}"/>
+                    <ListBox Grid.Row="2" Grid.ColumnSpan="2"
                          ItemsSource="{Binding PayeeAccounts}"
                          SelectedItem="{Binding SelectedPayeeAccount}"
                          ItemContainerStyle="{StaticResource DefaultListBox}"
                          Background="Transparent" 
                          >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock HorizontalAlignment="Left">
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} - {1}">
-                                        <Binding Path="AccountNumber"/>
-                                        <Binding Path="Payee.PayeeName"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Left">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="AccountNumber"/>
+                                            <Binding Path="Payee.PayeeName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+
             </Grid>
 
-        </Grid>
-            
         </Border>
 
 

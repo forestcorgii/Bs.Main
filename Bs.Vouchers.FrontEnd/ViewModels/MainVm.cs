@@ -25,6 +25,7 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
         public ICommand SelectCompany { get; }
 
         public ICommand VoucherMainListing { get; }
+        public ICommand PayeeAccountListing { get; }
 
         public ICommand VoucherListing { get; }
         public ICommand CompanyListing { get; }
@@ -53,8 +54,11 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
 
             SelectCompany = new RelayCommand<Company>((c) => SelectedCompany = c);
 
-            VoucherMainListing = new VoucherMainListing(this, companies, payeeAccounts, journalAccounts);
+            VoucherMainListing = new VoucherMainListing(this, companies, journalAccounts);
             VoucherMainListing.Execute(null);
+
+            PayeeAccountListing = new PayeeAccountListing(this, payeeAccounts);
+            PayeeAccountListing.Execute(null);
 
             ReloadFilters = new RelayCommand(() => VoucherMainListing.Execute(null));
 
@@ -62,6 +66,17 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
         }
 
         #region Properties
+        private string _payeeAccountSearchInput;
+        public string PayeeAccountSearchInput
+        {
+            get => _payeeAccountSearchInput;
+            set
+            {
+                SetProperty(ref _payeeAccountSearchInput, value);
+                PayeeAccountListing.Execute(value);
+            }
+        }
+
         private IEnumerable<Company> _companies;
         public IEnumerable<Company> Companies
         {
