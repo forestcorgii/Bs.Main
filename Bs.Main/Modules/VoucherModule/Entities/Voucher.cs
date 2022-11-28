@@ -30,6 +30,35 @@ namespace Bs.Main.Modules.VoucherModule.Entities
         public DateTime EntryDate { get; set; }
 
         public ObservableCollection<JournalEntry> JournalEntries { get; set; }
+        public double GrossAmount
+        {
+            get
+            {
+                if (JournalEntries.Any())
+                    return JournalEntries.Sum(j => j.Amount);
+                return 0;
+            }
+        }
+        public double NetAmount
+        {
+            get
+            {
+                if (JournalEntries.Any())
+                    return JournalEntries.Sum(j => j.NetAmount);
+                return 0;
+            }
+        }
+        public double TaxAmount
+        {
+            get
+            {
+                if (JournalEntries.Any())
+                    return JournalEntries.Sum(j => j.TaxAmount);
+                return 0;
+            }
+        }
+
+
 
         public string Remarks { get; set; }
 

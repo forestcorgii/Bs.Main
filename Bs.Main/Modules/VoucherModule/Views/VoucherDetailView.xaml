@@ -18,7 +18,6 @@
         <Style TargetType="TextBox">
             <Setter Property="MinWidth" Value="75"/>
             <Setter Property="Margin" Value="4"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="6"/>
@@ -45,11 +44,9 @@
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="125"/>
+            <ColumnDefinition />
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -58,7 +55,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Voucher Number:"/>
@@ -73,7 +70,6 @@
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Payee Account:"/>
         <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" Text="{Binding Voucher.PayeeAccount.AccountNumber}"/>
         <CheckBox Grid.Column="2" Grid.Row="2" Content="Use Owner name" IsChecked="{Binding Voucher.UseOwnerName}"/>
-        <TextBlock Grid.Column="3" Grid.Row="2" Style="{StaticResource PreviewTb}" Text="{Binding Voucher.PayeeNameToUse}"/>
 
         <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="5" Margin="8">
             <Grid.RowDefinitions>
@@ -104,16 +100,16 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBlock Text="Gross Amount:"/>
-                <TextBox IsReadOnly="True"/>
+                <TextBox Text="{Binding Voucher.GrossAmount,Mode=OneWay}"/>
                 <TextBlock Text="Total W.Tax:"/>
-                <TextBox IsReadOnly="True"/>
+                <TextBox Text="{Binding Voucher.TaxAmount,Mode=OneWay}"/>
                 <TextBlock Text="Net Amount:"/>
-                <TextBox IsReadOnly="True"/>
+                <TextBox Text="{Binding Voucher.NetAmount,Mode=OneWay}"/>
             </StackPanel>
 
         </Grid>
         
-        <Button Grid.Row="6" Grid.Column="3" Content="Save" HorizontalAlignment="Right" Command="{Binding Save}" CommandParameter="{Binding Voucher}"/>
+        <Button Grid.Row="6" Grid.Column="5" Content="Save" HorizontalAlignment="Right" Command="{Binding Save}" CommandParameter="{Binding Voucher}"/>
         
         
         

@@ -12,11 +12,26 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Bs.Main.Modules.VoucherModule.Enums;
 using CommunityToolkit.Mvvm.Input;
+using Bs.Main.Modules.MasterlistModule.ValueObjects;
+using CommunityToolkit.Mvvm.Messaging;
+using Bs.Main.Messages;
 
 namespace Bs.Main.Modules.VoucherModule.ViewModels
 {
     public class VoucherListingVm : ViewModelBase
     {
+        private PayeeAccount selectedPayeeAccount;
+        public PayeeAccount SelectedPayeeAccount
+        {
+            get => selectedPayeeAccount;
+            set
+            {
+                selectedPayeeAccount = value;
+            Listing.Execute(null);
+                //Reload();
+            }
+        }
+
         private ObservableCollection<Voucher> _vouchers;
         public ObservableCollection<Voucher> Vouchers { get => _vouchers; set => SetProperty(ref _vouchers, value); }
 
@@ -25,12 +40,11 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
             get => new ObservableCollection<VoucherStatus>(Enum.GetValues(typeof(VoucherStatus)).Cast<VoucherStatus>());
         }
 
-
         public ICommand Listing { get; }
         public ICommand Detail { get; }
-        public ICommand Cancel{ get; }
+        //public ICommand Cancel{ get; }
         public ICommand Print { get; }
-        
+
         public ICommand ReloadListing { get; }
 
 
@@ -49,6 +63,14 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
             CollectionChanged += (s, e) => Vouchers = new ObservableCollection<Voucher>(e.Select(o => (Voucher)o));
             Detail = new NavigateCommand<VoucherDetailVm>(voucherDetailNavigation);
 
+
+            //SelectedPayeeAccount = WeakReferenceMessenger.Default.Send<CurrentPayeeAccount>();
+            IsActive = true;
+        }
+
+        protected override void OnActivated()
+        {
+            Messenger.Register<VoucherListingVm, SelectedPayeeAccountChanged>(this, (r, m) => r.SelectedPayeeAccount = m.Value);
         }
     }
 }

@@ -27,13 +27,16 @@ namespace Bs.Main.Modules.VoucherModule.Commands
 
         public override async void Execute(object parameter)
         {
-            IEnumerable<Voucher> voucher = new List<Voucher>();
+            IEnumerable<Voucher> vouchers = new List<Voucher>();
             await Task.Run(() =>
             {
-                voucher = Vouchers.Get().Select(v => (Voucher)v);
+                vouchers = Vouchers.Get().Select(v => (Voucher)v);
+                vouchers= vouchers.Where(v => v.PayeeAccountId == Vm.SelectedPayeeAccount.Id);
             });
 
-            Vm.Vouchers = new ObservableCollection<Voucher>(voucher);
+
+
+            Vm.Vouchers = new ObservableCollection<Voucher>(vouchers);
         }
 
     }

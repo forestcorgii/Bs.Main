@@ -31,7 +31,6 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
 
             HSSFSheet sheet = (HSSFSheet)book.GetSheetAt(0);
 
-            string payeeName = voucher.UseOwnerName ? voucher.Payee.OwnerName : voucher.Payee.PayeeName;
             string parsumm = $"Representing Payment for: {string.Join(", ", voucher.JournalEntries.Select(j => j.JournalAccountName).ToArray())}";
             double netTotal = voucher.JournalEntries.Sum(a => a.NetAmount);
             double grossTotal = (double)voucher.JournalEntries.Sum(a => a.Amount);
@@ -41,7 +40,7 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
             {
                 sheet.GetRow(0 + partAdjustment).Cells[0].SetCellValue(voucher.Company.Name);
 
-                sheet.GetRow(2 + partAdjustment).Cells[1].SetCellValue($"** {payeeName} **");
+                sheet.GetRow(2 + partAdjustment).Cells[1].SetCellValue($"** {voucher.PayeeNameToUse} **");
                 sheet.GetRow(3 + partAdjustment).Cells[8].SetCellValue(voucher.VoucherNumber);
                 sheet.GetRow(4 + partAdjustment).Cells[1].SetCellValue(voucher.EntryDate.ToString("MMM dd, yyyy"));
 

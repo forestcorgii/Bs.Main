@@ -11,7 +11,7 @@
              x:Name="main">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -27,7 +27,7 @@
         <Button Style="{StaticResource Reload}" Command="{Binding ReloadListing}"/>
         
         <Button Style="{StaticResource Add}" Content="Add" HorizontalAlignment="Right" Command="{Binding Detail}"/>
-        
+
         <DataGrid Grid.Row="1" ItemsSource="{Binding Vouchers}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Actions">
@@ -53,6 +53,7 @@
                 <DataGridTextColumn Header="Payee" Binding="{Binding Payee.PayeeName}"/>
             </DataGrid.Columns>
         </DataGrid>
+                
 
 
     </Grid>
