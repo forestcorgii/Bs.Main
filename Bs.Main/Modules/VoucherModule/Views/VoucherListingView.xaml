@@ -49,8 +49,10 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Voucher Number" Binding="{Binding VoucherNumber}"/>
                 <DataGridTextColumn Header="Company" Binding="{Binding CompanyId}"/>
+                <DataGridTextColumn Header="Gross" Binding="{Binding GrossAmount}"/>
+                <DataGridTextColumn Header="Net" Binding="{Binding NetAmount}"/>
+                <DataGridTextColumn Header="W.Tax" Binding="{Binding TaxAmount}"/>
                 <DataGridTextColumn Header="Code" Binding="{Binding CompanyAccountCode}"/>
-                <DataGridTextColumn Header="Payee" Binding="{Binding Payee.PayeeName}"/>
             </DataGrid.Columns>
         </DataGrid>
                 

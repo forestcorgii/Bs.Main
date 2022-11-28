@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        
         xmlns:local="clr-namespace:Bs.Main.Modules.VoucherModule.Views" 
         xmlns:viewmodels="clr-namespace:Bs.Main.Modules.VoucherModule.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:JournalEntryDetailVm}"
@@ -35,15 +39,15 @@
                   ItemsSource="{Binding JournalAccounts}"/>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Amount:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding JournalEntry.Amount}"/>
+        <ui:NumberBox Grid.Row="2" Grid.Column="1" SpinButtonPlacementMode="Inline"  Value="{Binding JournalEntry.Amount}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="W.Tax Rate:"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding JournalEntry.WithholdingTaxRate}"/>
+        <ui:NumberBox Grid.Row="2" Grid.Column="3" Text="{Binding JournalEntry.WithholdingTaxRate}"/>
         
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Net Amount:"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding JournalEntry.NetAmount}"/>
+        <ui:NumberBox Grid.Row="3" Grid.Column="1" Text="{Binding JournalEntry.NetAmount,Mode=OneWay}"/>
         
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Tax Amount:"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding JournalEntry.TaxAmount}"/>
+        <ui:NumberBox Grid.Row="4" Grid.Column="1" Text="{Binding JournalEntry.TaxAmount,Mode=OneWay}"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Particulars:"/>
         <Button Grid.Row="5" Grid.Column="1" Content="Add" Style="{StaticResource Add}" Command="{Binding AddParticularItem}"/>
