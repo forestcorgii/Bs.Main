@@ -27,7 +27,7 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
             set
             {
                 selectedPayeeAccount = value;
-            Listing.Execute(null);
+                Listing.Execute(null);
                 //Reload();
             }
         }
@@ -42,7 +42,7 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
 
         public ICommand Listing { get; }
         public ICommand Detail { get; }
-        //public ICommand Cancel{ get; }
+        public ICommand CancelVoucher { get; }
         public ICommand Print { get; }
 
         public ICommand ReloadListing { get; }
@@ -51,23 +51,26 @@ namespace Bs.Main.Modules.VoucherModule.ViewModels
         public VoucherListingVm(Vouchers vouchers, NavigationService<VoucherDetailVm> voucherDetailNavigation)
         {
             Vouchers = new ObservableCollection<Voucher>();
-
             Print = new PrintVoucher(this, vouchers);
-
             Listing = new Listing(this, vouchers);
-            Listing.Execute(null);
-            OnReloadRequest += (s, e) => Listing.Execute(null);
-
-            ReloadListing = new RelayCommand(() => Reload());
-
-            CollectionChanged += (s, e) => Vouchers = new ObservableCollection<Voucher>(e.Select(o => (Voucher)o));
             Detail = new NavigateCommand<VoucherDetailVm>(voucherDetailNavigation);
 
+            LoadValues();
 
-            //SelectedPayeeAccount = WeakReferenceMessenger.Default.Send<CurrentPayeeAccount>();
+            OnReloadRequest += (s, e) => Listing.Execute(null);
+            ReloadListing = new RelayCommand(() => Reload());
+            CollectionChanged += (s, e) => Vouchers = new ObservableCollection<Voucher>(e.Select(o => (Voucher)o));
+
             IsActive = true;
         }
+        private void LoadValues()
+        {
+            PayeeAccount payeeAccount = WeakReferenceMessenger.Default.Send<CurrentPayeeAccount>();
+            if (payeeAccount is not null)
+                SelectedPayeeAccount = payeeAccount;
 
+            OnPropertyChanged(nameof(Voucher));
+        }
         protected override void OnActivated()
         {
             Messenger.Register<VoucherListingVm, SelectedPayeeAccountChanged>(this, (r, m) => r.SelectedPayeeAccount = m.Value);

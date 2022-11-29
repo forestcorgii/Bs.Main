@@ -39,15 +39,10 @@
                   ItemsSource="{Binding JournalAccounts}"/>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Amount:"/>
-        <ui:NumberBox Grid.Row="2" Grid.Column="1" SpinButtonPlacementMode="Inline"  Value="{Binding JournalEntry.Amount}"/>
+        <ui:NumberBox Grid.Row="2" Grid.Column="1" Value="{Binding JournalEntry.Amount}" SmallChange="1000" LargeChange="10000"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="W.Tax Rate:"/>
-        <ui:NumberBox Grid.Row="2" Grid.Column="3" Text="{Binding JournalEntry.WithholdingTaxRate}"/>
+        <ui:NumberBox Grid.Row="2" Grid.Column="3" Text="{Binding JournalEntry.WithholdingTaxRate}" SmallChange="0.01" LargeChange="0.01"/>
         
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Net Amount:"/>
-        <ui:NumberBox Grid.Row="3" Grid.Column="1" Text="{Binding JournalEntry.NetAmount,Mode=OneWay}"/>
-        
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Tax Amount:"/>
-        <ui:NumberBox Grid.Row="4" Grid.Column="1" Text="{Binding JournalEntry.TaxAmount,Mode=OneWay}"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Particulars:"/>
         <Button Grid.Row="5" Grid.Column="1" Content="Add" Style="{StaticResource Add}" Command="{Binding AddParticularItem}"/>

@@ -24,5 +24,6 @@ namespace Bs.Main.Modules.VoucherModule.Views
         {
             InitializeComponent();
         }
+         
     }
 }

@@ -30,10 +30,11 @@
     </UserControl.Resources>
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="125"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -46,17 +47,19 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Voucher Number:" />
-        <TextBox  Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding Voucher.VoucherNumber}"/>
+        <TextBlock  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Text="{Binding Voucher.VoucherNumber}"/>
 
         <TextBlock Grid.Column="2" Grid.Row="0" Text="Entry Date:"/>
         <DatePicker Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"  SelectedDate="{Binding Voucher.EntryDate}"/>
 
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Company Account:"/>
-        <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Text="{Binding Voucher.CompanyAccountCode}" />
+        <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Text="{Binding Voucher.CompanyAccountCode}" />
 
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Payee Account:"/>
-        <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" Text="{Binding Voucher.PayeeAccount.AccountNumber}"/>
-        <CheckBox Grid.Column="2" Grid.Row="2" Content="Use Owner name" IsChecked="{Binding Voucher.UseOwnerName}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Text="{Binding Voucher.PayeeAccount.AccountNumber}"/>
+        
+        <TextBlock Grid.Column="2" Grid.Row="1" Text="Payee Name:"/>
+        <ui:ToggleSwitch Grid.Column="3" Grid.Row="1" Margin="8 0" IsOn="{Binding Voucher.UseOwnerName}" OnContent="{Binding Voucher.Payee.OwnerName}" OffContent="{Binding Voucher.Payee.PayeeName}" />
 
         <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="5" Margin="8">
             <Grid.RowDefinitions>

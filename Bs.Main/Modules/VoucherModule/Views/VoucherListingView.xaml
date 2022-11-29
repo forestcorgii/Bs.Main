@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"        
              xmlns:local="clr-namespace:Bs.Main.Modules.VoucherModule.Views" 
              xmlns:viewmodels="clr-namespace:Bs.Main.Modules.VoucherModule.ViewModels" 
              d:DataContext="{d:DesignInstance Type=viewmodels:VoucherListingVm}"
@@ -36,23 +37,18 @@
                             <StackPanel Orientation="Horizontal">
                                 <!--<Button Style="{StaticResource Edit}" Command="{Binding Edit}"  CommandParameter="{Binding }"/>-->
                                 <Button Style="{StaticResource Print}" Command="{Binding DataContext.Print, ElementName=main}" CommandParameter="{Binding }"/>
+                                <Button Style="{StaticResource Delete}" Command="{Binding DataContext.CancelVoucher, ElementName=main}" CommandParameter="{Binding }"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Status">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox SelectedValue="{Binding Status}" ItemsSource="{Binding DataContext.VoucherStatusOption, ElementName=main}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                 <DataGridTextColumn Header="Voucher Number" Binding="{Binding VoucherNumber}"/>
                 <DataGridTextColumn Header="Company" Binding="{Binding CompanyId}"/>
-                <DataGridTextColumn Header="Gross" Binding="{Binding GrossAmount}"/>
-                <DataGridTextColumn Header="Net" Binding="{Binding NetAmount}"/>
-                <DataGridTextColumn Header="W.Tax" Binding="{Binding TaxAmount}"/>
-                <DataGridTextColumn Header="Code" Binding="{Binding CompanyAccountCode}"/>
+                <DataGridTextColumn Header="Gross" Binding="{Binding GrossAmount,StringFormat={}{0:0.00}}"/>
+                <DataGridTextColumn Header="Net" Binding="{Binding NetAmount,StringFormat={}{0:0.00}}"/>
+                <DataGridTextColumn Header="W.Tax" Binding="{Binding TaxAmount,StringFormat={}{0:0.00}}"/>
+                <DataGridTextColumn Header="Code" Binding="{Binding CompanyAccountCode,StringFormat={}{0:0.00}}"/>
             </DataGrid.Columns>
         </DataGrid>
                 
