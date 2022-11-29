@@ -42,16 +42,7 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             NavigationService<VoucherDetailVm> voucherDetail
             )
         {
-            _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
-
-            VoucherListing = new NavigateCommand<VoucherListingVm>(voucherListing);
-            VoucherListing.Execute(null);
-
-            VoucherDetail = new NavigateCommand<VoucherDetailVm>(voucherDetail);
-
-
+            
             SelectCompany = new RelayCommand<Company>((c) => SelectedCompany = c);
 
             VoucherMainListing = new VoucherMainListing(this, companies, journalAccounts);
@@ -63,6 +54,15 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
             ReloadFilters = new RelayCommand(() => VoucherMainListing.Execute(null));
 
             IsActive = true;
+
+
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
+            VoucherListing = new NavigateCommand<VoucherListingVm>(voucherListing);
+            VoucherListing.Execute(null);
+
+            VoucherDetail = new NavigateCommand<VoucherDetailVm>(voucherDetail);
         }
 
         #region Properties
@@ -145,6 +145,7 @@ namespace Bs.Vouchers.FrontEnd.ViewModels
                 SetProperty(ref _selectedCompanyAccount, value);
                 if (_selectedCompanyAccount is not null)
                     Messenger.Send(new SelectedCompanyAccountChanged(_selectedCompanyAccount));
+                else Messenger.Send(new SelectedCompanyAccountChanged(new()));
             }
         }
 

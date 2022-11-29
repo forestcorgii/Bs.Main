@@ -5,7 +5,8 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"        
              xmlns:bsmain="clr-namespace:Bs.Main;assembly=Bs.Main"
              xmlns:voucherVms="clr-namespace:Bs.Main.Modules.VoucherModule.ViewModels;assembly=Bs.Main"
-             xmlns:voucherViews="clr-namespace:Bs.Main.Modules.VoucherModule.Views;assembly=Bs.Main" xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation">
+             xmlns:voucherViews="clr-namespace:Bs.Main.Modules.VoucherModule.Views;assembly=Bs.Main" 
+             xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,7 +45,6 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
- 
             <Style x:Key="LongText" TargetType="TextBox">
                 <Setter Property="Width" Value="auto"/>
                 <Setter Property="Margin" Value="3"/>
