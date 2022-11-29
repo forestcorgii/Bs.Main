@@ -21,8 +21,8 @@ namespace Bs.Main.Modules.VoucherModule.ValueObjects
 
         public double WithholdingTaxRate { get; set; }
 
-        public double TaxAmount { get => Amount * WithholdingTaxRate; }
-        public double NetAmount { get => Amount - TaxAmount; }
+        public double TaxAmount { get => -(Amount * WithholdingTaxRate); }
+        public double NetAmount { get => Amount + TaxAmount; }
 
         public ObservableCollection<ParticularsKeyValue> Particulars { get; set; }
 
