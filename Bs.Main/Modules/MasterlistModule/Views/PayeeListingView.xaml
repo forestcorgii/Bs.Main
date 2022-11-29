@@ -41,7 +41,6 @@
                   ItemsSource="{Binding Payees}" 
                   SelectedValue="{Binding SelectedPayee}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Payee Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Payee Name" Binding="{Binding PayeeName}"/>
                 <DataGridTextColumn Header="Owner Name" Binding="{Binding OwnerName}"/>
                 <!--<DataGridTextColumn Header="Tin" Binding="{Binding Tin}"/>

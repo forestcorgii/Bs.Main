@@ -50,7 +50,7 @@ namespace Bs.Main.Modules.MasterlistModule.ViewModels
             CollectionChanged += (s, e) => PayeeAccounts = new ObservableCollection<PayeeAccount>(e.Select(o => (PayeeAccount)o));
         }
         #endregion
-
+        
         public PayeeAccountListingVm(PayeeAccounts payeeAccounts)
         {
             Listing = new Listing(this, payeeAccounts);

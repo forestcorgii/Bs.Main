@@ -41,8 +41,7 @@
 
         <Button Grid.Row="3" Grid.Column="2" Command="{Binding Save}" CommandParameter="{Binding SelectedCompanyAccount}" Style="{StaticResource Add}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/images/add.png"/>
-                <TextBlock Text="Add"/>
+                <TextBlock Text="Save"/>
             </StackPanel>
         </Button>
         <Button Grid.Row="3" Grid.Column="3" Content="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedCompanyAccount}"/>
