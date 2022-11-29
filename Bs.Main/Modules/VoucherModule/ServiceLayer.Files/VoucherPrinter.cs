@@ -32,8 +32,6 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
             HSSFSheet sheet = (HSSFSheet)book.GetSheetAt(0);
 
             string parsumm = $"Representing Payment for: {string.Join(", ", voucher.JournalEntries.Select(j => j.JournalAccountName).ToArray())}";
-            double netTotal = voucher.JournalEntries.Sum(a => a.NetAmount);
-            double grossTotal = (double)voucher.JournalEntries.Sum(a => a.Amount);
 
 
             foreach (int partAdjustment in new[] { 0, 38 })
@@ -57,27 +55,27 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
                     IRow journalLineRow = sheet.GetRow(Append(ref particularsIndex) + partAdjustment);
                     journalLineRow.Cells[1].SetCellValue(d.JournalAccountName);
                     journalLineRow.Cells[9].SetCellValue("PHP");
-                    journalLineRow.Cells[10].SetCellValue((double)d.Amount);
+                    journalLineRow.Cells[10].SetCellValue(d.Amount);
 
 
                     // CHART OF ACCOUNTS
                     IRow coaRow = sheet.GetRow(Append(ref chartOfAccountsIndex) + partAdjustment);
                     coaRow.Cells[0].SetCellValue(d.JournalAccountName);
-                    coaRow.Cells[4].SetCellValue((double)d.Amount);
+                    coaRow.Cells[4].SetCellValue(voucher.GrossAmount);
 
-                    if (d.TaxAmount > 0d)
-                    {
-                        // PARTICULARS
-                        IRow particularsWtaxRow = sheet.GetRow(Append(ref particularsIndex) + partAdjustment);
-                        particularsWtaxRow.Cells[7].SetCellValue($"less {d.WithholdingTaxRate * 100}% wtax");
-                        particularsWtaxRow.Cells[10].SetCellValue(d.TaxAmount);
+                    //if (d.TaxAmount > 0d)
+                    //{
+                    // PARTICULARS
+                    IRow particularsWtaxRow = sheet.GetRow(Append(ref particularsIndex) + partAdjustment);
+                    particularsWtaxRow.Cells[7].SetCellValue($"less {d.WithholdingTaxRate * 100}% wtax");
+                    particularsWtaxRow.Cells[10].SetCellValue(d.TaxAmount);
 
 
-                        // CHART OF ACCOUNTS
-                        IRow coaWtaxRow = sheet.GetRow(Append(ref chartOfAccountsIndex) + partAdjustment);
-                        coaWtaxRow.Cells[0].SetCellValue("        wtax");
-                        coaWtaxRow.Cells[4].SetCellValue(d.TaxAmount);
-                    }
+                    // CHART OF ACCOUNTS
+                    IRow coaWtaxRow = sheet.GetRow(Append(ref chartOfAccountsIndex) + partAdjustment);
+                    coaWtaxRow.Cells[0].SetCellValue("        wtax");
+                    coaWtaxRow.Cells[5].SetCellValue(Math.Abs(d.TaxAmount));
+                    //}
 
                     // PARTICULARS
                     if (partAdjustment > 0)
@@ -89,14 +87,14 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
 
                 IRow grandTotalRow = sheet.GetRow(20 + partAdjustment);
                 grandTotalRow.Cells[9].SetCellValue("PHP");
-                grandTotalRow.Cells[10].SetCellValue(netTotal);
+                grandTotalRow.Cells[10].SetCellValue(voucher.NetAmount);
 
                 Append(ref chartOfAccountsIndex);
                 IRow coaTotalRow = sheet.GetRow(Append(ref chartOfAccountsIndex) + partAdjustment);
                 coaTotalRow.Cells[0].SetCellValue($"        Cash in Bank({voucher.CompanyAccountCode})");
-                coaTotalRow.Cells[5].SetCellValue(grossTotal);
+                coaTotalRow.Cells[5].SetCellValue(voucher.NetAmount);
 
-                sheet.GetRow(24 + partAdjustment).Cells[7].SetCellValue(grossTotal.ToWords());
+                sheet.GetRow(24 + partAdjustment).Cells[7].SetCellValue(voucher.GrossAmount.ToWords());
 
                 sheet.GetRow(28 + partAdjustment).Cells[7].SetCellValue(voucher.CompanyAccountCode);
                 sheet.GetRow(28 + partAdjustment).Cells[9].SetCellValue(voucher.VoucherNumber);
@@ -136,7 +134,7 @@ namespace Bs.Main.Modules.VoucherModule.ServiceLayer.Files
     {
         public static string ToWords(this double value)
         {
-            if(value > 0)
+            if (value > 0)
             {
                 string stringValue;
                 string[] valueArgs = value.ToString("0.00").Split(".");
